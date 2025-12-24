@@ -1,0 +1,76 @@
+name: Pages Integration Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      template_path:
+        description: 'Path to Pages template file'
+        required: false
+        default: '~/Documents/PagesDefaultStyles.pages'
+
+jobs:
+  integration-tests:
+    name: Pages Integration
+    runs-on: [self-hosted, macos]
+    env:
+      TEMPLATE: ${{ github.event.inputs.template_path }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for Pages.app
+        id: check-pages
+        run: |
+          if [ -d "/Applications/Pages.app" ] || [ -d "/System/Applications/Pages.app" ] || [ -d "$HOME/Applications/Pages.app" ]; then
+            echo "pages_found=true" >> $GITHUB_OUTPUT
+            echo "Pages.app found."
+          else
+            echo "pages_found=false" >> $GITHUB_OUTPUT
+            echo "::warning::Pages.app not found. Skipping integration tests."
+          fi
+
+      - name: Check for template
+        if: steps.check-pages.outputs.pages_found == 'true'
+        id: check-template
+        run: |
+          TEMPLATE_EXPANDED="${TEMPLATE/#\~/$HOME}"
+          if [ -e "$TEMPLATE_EXPANDED" ]; then
+            echo "template_found=true" >> $GITHUB_OUTPUT
+            echo "Template found at: $TEMPLATE_EXPANDED"
+            echo "template_path=$TEMPLATE_EXPANDED" >> $GITHUB_OUTPUT
+          else
+            echo "template_found=false" >> $GITHUB_OUTPUT
+            echo "::warning::Template not found at $TEMPLATE_EXPANDED. Skipping integration tests."
+          fi
+
+      - name: Build release
+        if: steps.check-pages.outputs.pages_found == 'true' && steps.check-template.outputs.template_found == 'true'
+        run: swift build -c release
+
+      - name: Run smoke tests
+        if: steps.check-pages.outputs.pages_found == 'true' && steps.check-template.outputs.template_found == 'true'
+        env:
+          TEMPLATE: ${{ steps.check-template.outputs.template_path }}
+        run: |
+          chmod +x scripts/smoke_test.sh
+          scripts/smoke_test.sh
+
+      - name: Upload smoke test outputs
+        if: steps.check-pages.outputs.pages_found == 'true' && steps.check-template.outputs.template_found == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-outputs
+          path: /tmp/docx2pages_smoke_test/
+          retention-days: 3
+          if-no-files-found: ignore
+
+      - name: Report skipped
+        if: steps.check-pages.outputs.pages_found != 'true' || steps.check-template.outputs.template_found != 'true'
+        run: |
+          echo "Integration tests skipped due to missing dependencies."
+          echo "- Pages.app: ${{ steps.check-pages.outputs.pages_found }}"
+          echo "- Template: ${{ steps.check-template.outputs.template_found }}"
+          echo ""
+          echo "To run integration tests, ensure:"
+          echo "1. Pages.app is installed"
+          echo "2. A template file exists at the specified path"
+          echo "3. Automation permissions are granted"

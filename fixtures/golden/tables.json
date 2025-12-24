@@ -1,0 +1,109 @@
+{
+  "blocks": [
+    {
+      "level": 1,
+      "text": "Document with Tables",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Simple 3x3 Table",
+      "type": "heading"
+    },
+    {
+      "text": "Here is a simple table:",
+      "type": "paragraph"
+    },
+    {
+      "rows": [
+        [
+          "Header 1",
+          "Header 2",
+          "Header 3"
+        ],
+        [
+          "Row 1 Col 1",
+          "Row 1 Col 2",
+          "Row 1 Col 3"
+        ],
+        [
+          "Row 2 Col 1",
+          "Row 2 Col 2",
+          "Row 2 Col 3"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "level": 2,
+      "text": "Data Table",
+      "type": "heading"
+    },
+    {
+      "text": "A larger data table:",
+      "type": "paragraph"
+    },
+    {
+      "rows": [
+        [
+          "Name",
+          "Age",
+          "City",
+          "Country"
+        ],
+        [
+          "Alice",
+          "30",
+          "New York",
+          "USA"
+        ],
+        [
+          "Bob",
+          "25",
+          "London",
+          "UK"
+        ],
+        [
+          "Charlie",
+          "35",
+          "Paris",
+          "France"
+        ],
+        [
+          "Diana",
+          "28",
+          "Tokyo",
+          "Japan"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "level": 2,
+      "text": "Conclusion",
+      "type": "heading"
+    },
+    {
+      "text": "Tables demonstrate structure preservation.",
+      "type": "paragraph"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 1,
+      "level_2": 3
+    },
+    "lists": {
+      "bulleted": 0,
+      "numbered": 0
+    },
+    "paragraphs": 3,
+    "tables": {
+      "count": 2,
+      "max_cols": 4,
+      "max_rows": 5
+    },
+    "warnings": []
+  }
+}

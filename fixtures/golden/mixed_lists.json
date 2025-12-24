@@ -1,0 +1,98 @@
+{
+  "blocks": [
+    {
+      "level": 1,
+      "text": "Document with Mixed Lists",
+      "type": "heading"
+    },
+    {
+      "text": "Here is a bulleted list:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "First bullet item"
+        },
+        {
+          "level": 0,
+          "text": "Second bullet item"
+        },
+        {
+          "level": 1,
+          "text": "Nested bullet item"
+        },
+        {
+          "level": 1,
+          "text": "Another nested item"
+        },
+        {
+          "level": 2,
+          "text": "Deeply nested item"
+        },
+        {
+          "level": 0,
+          "text": "Third bullet item"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "text": "And here is a numbered list:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "First numbered item"
+        },
+        {
+          "level": 0,
+          "text": "Second numbered item"
+        },
+        {
+          "level": 1,
+          "text": "Sub-item a"
+        },
+        {
+          "level": 1,
+          "text": "Sub-item b"
+        },
+        {
+          "level": 2,
+          "text": "Sub-sub-item i"
+        },
+        {
+          "level": 0,
+          "text": "Third numbered item"
+        }
+      ],
+      "ordered": true,
+      "type": "list"
+    },
+    {
+      "text": "End of lists section.",
+      "type": "paragraph"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 1
+    },
+    "lists": {
+      "bulleted": 1,
+      "numbered": 1
+    },
+    "paragraphs": 3,
+    "tables": {
+      "count": 0,
+      "max_cols": 0,
+      "max_rows": 0
+    },
+    "warnings": []
+  }
+}

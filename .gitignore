@@ -1,0 +1,38 @@
+# Build artifacts
+.build/
+DerivedData/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# Xcode
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+
+# Output files
+output/
+dist/
+*.pages
+
+# OS files
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# IDE
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+env/
+venv/
+
+# Temporary files
+*.tmp
+*.temp

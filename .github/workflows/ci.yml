@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  parser-tests:
+    name: Parser Tests
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Test parser on all fixtures
+        run: |
+          echo "Testing parser on all fixtures..."
+          for docx in fixtures/*.docx; do
+            echo "Parsing: $docx"
+            python3 scripts/parse_docx.py "$docx" > /dev/null
+            if [ $? -ne 0 ]; then
+              echo "FAIL: $docx"
+              exit 1
+            fi
+            echo "OK: $docx"
+          done
+          echo "All fixtures parsed successfully."
+
+      - name: Run golden tests
+        run: |
+          python3 scripts/test_parser_golden.py
+
+  build-macos:
+    name: Build (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build release
+        run: swift build -c release
+
+      - name: CLI version check
+        run: |
+          .build/release/docx2pages --version
+
+      - name: CLI help check
+        run: |
+          .build/release/docx2pages --help
+
+      - name: CLI surface contract
+        run: |
+          # Verify expected options exist in help output
+          HELP=$(.build/release/docx2pages --help)
+          echo "$HELP" | grep -q -- "--input" || (echo "Missing --input"; exit 1)
+          echo "$HELP" | grep -q -- "--output" || (echo "Missing --output"; exit 1)
+          echo "$HELP" | grep -q -- "--template" || (echo "Missing --template"; exit 1)
+          echo "$HELP" | grep -q -- "--strict" || (echo "Missing --strict"; exit 1)
+          echo "$HELP" | grep -q -- "--json-summary" || (echo "Missing --json-summary"; exit 1)
+          echo "$HELP" | grep -q -- "--no-wait" || (echo "Missing --no-wait"; exit 1)
+          echo "$HELP" | grep -q -- "--no-lock" || (echo "Missing --no-lock"; exit 1)
+          echo "$HELP" | grep -q -- "--verbose" || (echo "Missing --verbose"; exit 1)
+          echo "CLI surface contract verified."
+
+      - name: Upload binary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docx2pages-macos
+          path: .build/release/docx2pages
+          retention-days: 7

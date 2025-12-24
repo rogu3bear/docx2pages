@@ -1,0 +1,192 @@
+{
+  "blocks": [
+    {
+      "text": "Comprehensive Test Document",
+      "type": "title"
+    },
+    {
+      "text": "Testing all supported elements",
+      "type": "subtitle"
+    },
+    {
+      "level": 1,
+      "text": "Introduction",
+      "type": "heading"
+    },
+    {
+      "text": "This document tests all supported document elements including headings, paragraphs, lists, and tables.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Document Structure",
+      "type": "heading"
+    },
+    {
+      "text": "The following sections demonstrate each element type.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Heading Hierarchy",
+      "type": "heading"
+    },
+    {
+      "text": "We support all standard heading levels.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Lists Section",
+      "type": "heading"
+    },
+    {
+      "text": "Bulleted items:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Feature one"
+        },
+        {
+          "level": 0,
+          "text": "Feature two"
+        },
+        {
+          "level": 1,
+          "text": "Sub-feature"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "text": "Numbered steps:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "First step"
+        },
+        {
+          "level": 0,
+          "text": "Second step"
+        },
+        {
+          "level": 0,
+          "text": "Third step"
+        }
+      ],
+      "ordered": true,
+      "type": "list"
+    },
+    {
+      "level": 2,
+      "text": "Tables Section",
+      "type": "heading"
+    },
+    {
+      "rows": [
+        [
+          "Element",
+          "Supported",
+          "Notes"
+        ],
+        [
+          "Headings",
+          "Yes",
+          "Levels 1-9"
+        ],
+        [
+          "Lists",
+          "Yes",
+          "Bulleted and numbered"
+        ],
+        [
+          "Tables",
+          "Yes",
+          "Basic structure"
+        ],
+        [
+          "Inline styles",
+          "No",
+          "Dropped by design"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "level": 2,
+      "text": "Deep Headings",
+      "type": "heading"
+    },
+    {
+      "text": "Testing deeper heading levels:",
+      "type": "paragraph"
+    },
+    {
+      "level": 4,
+      "text": "Level 4 Section",
+      "type": "heading"
+    },
+    {
+      "text": "Content at level 4.",
+      "type": "paragraph"
+    },
+    {
+      "level": 5,
+      "text": "Level 5 Section",
+      "type": "heading"
+    },
+    {
+      "text": "Content at level 5.",
+      "type": "paragraph"
+    },
+    {
+      "level": 6,
+      "text": "Level 6 Section",
+      "type": "heading"
+    },
+    {
+      "text": "Content at level 6.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Conclusion",
+      "type": "heading"
+    },
+    {
+      "text": "This concludes the comprehensive test document.",
+      "type": "paragraph"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 2,
+      "level_2": 4,
+      "level_3": 1,
+      "level_4": 1,
+      "level_5": 1,
+      "level_6": 1,
+      "subtitle": 1,
+      "title": 1
+    },
+    "lists": {
+      "bulleted": 1,
+      "numbered": 1
+    },
+    "paragraphs": 10,
+    "tables": {
+      "count": 1,
+      "max_cols": 3,
+      "max_rows": 5
+    },
+    "warnings": []
+  }
+}

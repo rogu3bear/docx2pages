@@ -1,0 +1,133 @@
+{
+  "blocks": [
+    {
+      "text": "Document Title",
+      "type": "title"
+    },
+    {
+      "text": "Document Subtitle",
+      "type": "subtitle"
+    },
+    {
+      "text": "This is an introductory paragraph.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter One",
+      "type": "heading"
+    },
+    {
+      "text": "Some content under chapter one.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Content under section 1.1.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 1.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Content under subsection.",
+      "type": "paragraph"
+    },
+    {
+      "level": 4,
+      "text": "Level 4 Heading",
+      "type": "heading"
+    },
+    {
+      "text": "Content under level 4.",
+      "type": "paragraph"
+    },
+    {
+      "level": 5,
+      "text": "Level 5 Heading",
+      "type": "heading"
+    },
+    {
+      "text": "Content under level 5.",
+      "type": "paragraph"
+    },
+    {
+      "level": 6,
+      "text": "Level 6 Heading",
+      "type": "heading"
+    },
+    {
+      "text": "Content under level 6.",
+      "type": "paragraph"
+    },
+    {
+      "level": 7,
+      "text": "Level 7 Heading",
+      "type": "heading"
+    },
+    {
+      "text": "Content under level 7.",
+      "type": "paragraph"
+    },
+    {
+      "level": 8,
+      "text": "Level 8 Heading",
+      "type": "heading"
+    },
+    {
+      "text": "Content under level 8.",
+      "type": "paragraph"
+    },
+    {
+      "level": 9,
+      "text": "Level 9 Heading",
+      "type": "heading"
+    },
+    {
+      "text": "Content under level 9.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Custom Derived Heading",
+      "type": "heading"
+    },
+    {
+      "text": "This uses a custom style derived from Heading 2.",
+      "type": "paragraph"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 1,
+      "level_2": 2,
+      "level_3": 1,
+      "level_4": 1,
+      "level_5": 1,
+      "level_6": 1,
+      "level_7": 1,
+      "level_8": 1,
+      "level_9": 1,
+      "subtitle": 1,
+      "title": 1
+    },
+    "lists": {
+      "bulleted": 0,
+      "numbered": 0
+    },
+    "paragraphs": 11,
+    "tables": {
+      "count": 0,
+      "max_cols": 0,
+      "max_rows": 0
+    },
+    "warnings": []
+  }
+}

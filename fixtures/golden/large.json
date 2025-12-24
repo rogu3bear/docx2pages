@@ -1,0 +1,2872 @@
+{
+  "blocks": [
+    {
+      "text": "Large Performance Test Document",
+      "type": "title"
+    },
+    {
+      "text": "Testing scalability with many elements",
+      "type": "subtitle"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 1: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 1.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 1.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 1.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 1.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 1.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 1.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 1.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 1.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 1.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 1.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 1.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 1.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 1.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 1.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 1.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 1.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 1.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 1.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 1.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 1.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 1.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 1.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 1.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 1.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 1.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 1.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 1.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 1.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 1.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 1.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 1.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 1.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 1.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 1.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 1.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 1.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 1.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 1.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 1.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 1.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 1.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 2: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 2.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 2.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 2.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 2.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 2.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 2.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 2.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 2.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 2.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 2.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 2.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 2.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 2.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 2.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 2.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 2.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 2.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 2.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 2.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 2.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 2.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 2.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 2.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 2.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 2.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 2.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 2.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 2.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 2.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 2.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 2.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 2.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 2.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 2.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 2.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 2.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 2.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 2.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 2.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 2.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 2.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 3: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 3.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 3.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 3.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 3.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 3.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 3.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 3.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 3.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 3.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 3.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 3.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 3.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 3.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 3.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 3.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 3.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 3.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 3.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 3.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 3.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 3.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 3.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 3.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 3.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 3.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 3.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 3.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 3.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 3.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 3.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 3.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 3.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 3.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 3.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 3.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 3.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 3.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 3.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 3.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 3.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 3.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 4: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 4.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 4.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 4.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 4.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 4.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 4.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 4.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 4.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 4.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 4.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 4.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 4.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 4.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 4.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 4.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 4.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 4.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 4.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 4.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 4.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 4.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 4.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 4.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 4.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 4.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 4.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 4.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 4.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 4.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 4.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 4.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 4.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 4.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 4.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 4.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 4.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 4.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 4.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 4.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 4.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 4.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 5: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 5.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 5.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 5.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 5.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 5.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 5.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 5.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 5.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 5.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 5.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 5.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 5.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 5.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 5.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 5.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 5.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 5.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 5.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 5.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 5.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 5.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 5.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 5.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 5.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 5.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 5.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 5.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 5.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 5.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 5.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 5.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 5.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 5.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 5.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 5.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 5.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 5.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 5.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 5.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 5.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 5.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 6: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 6.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 6.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 6.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 6.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 6.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 6.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 6.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 6.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 6.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 6.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 6.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 6.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 6.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 6.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 6.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 6.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 6.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 6.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 6.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 6.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 6.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 6.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 6.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 6.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 6.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 6.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 6.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 6.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 6.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 6.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 6.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 6.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 6.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 6.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 6.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 6.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 6.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 6.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 6.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 6.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 6.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 7: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 7.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 7.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 7.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 7.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 7.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 7.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 7.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 7.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 7.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 7.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 7.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 7.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 7.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 7.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 7.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 7.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 7.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 7.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 7.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 7.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 7.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 7.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 7.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 7.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 7.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 7.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 7.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 7.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 7.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 7.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 7.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 7.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 7.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 7.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 7.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 7.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 7.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 7.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 7.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 7.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 7.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 8: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 8.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 8.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 8.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 8.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 8.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 8.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 8.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 8.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 8.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 8.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 8.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 8.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 8.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 8.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 8.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 8.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 8.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 8.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 8.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 8.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 8.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 8.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 8.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 8.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 8.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 8.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 8.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 8.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 8.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 8.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 8.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 8.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 8.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 8.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 8.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 8.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 8.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 8.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 8.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 8.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 8.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 9: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 9.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 9.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 9.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 9.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 9.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 9.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 9.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 9.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 9.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 9.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 9.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 9.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 9.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 9.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 9.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 9.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 9.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 9.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 9.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 9.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 9.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 9.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 9.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 9.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 9.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 9.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 9.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 9.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 9.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 9.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 9.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 9.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 9.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 9.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 9.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 9.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 9.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 9.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 9.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 9.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 9.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Chapter 10: Lorem Ipsum Section",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Section 10.1",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 10.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 10.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 10.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 10.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 10.1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 10.1.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 10.2",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 10.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 10.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 10.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 10.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 10.2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 10.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 10.2"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 10.2"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 10.2.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 10.3",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 10.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 10.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 10.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 10.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 10.3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 10.3.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 10.4",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 10.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 10.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 10.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 10.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 10.4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Key points:",
+      "type": "paragraph"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Point 1 for section 10.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 2 for section 10.4"
+        },
+        {
+          "level": 0,
+          "text": "Point 3 for section 10.4"
+        }
+      ],
+      "ordered": false,
+      "type": "list"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 10.4.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Section 10.5",
+      "type": "heading"
+    },
+    {
+      "text": "This is paragraph 1 in section 10.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 2 in section 10.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 3 in section 10.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 4 in section 10.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "text": "This is paragraph 5 in section 10.5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "type": "paragraph"
+    },
+    {
+      "level": 3,
+      "text": "Subsection 10.5.1",
+      "type": "heading"
+    },
+    {
+      "text": "Subsection content paragraph 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Subsection content paragraph 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Data Tables",
+      "type": "heading"
+    },
+    {
+      "level": 2,
+      "text": "Table 1: Sample Data",
+      "type": "heading"
+    },
+    {
+      "rows": [
+        [
+          "Column A",
+          "Column B",
+          "Column C",
+          "Column D",
+          "Column E"
+        ],
+        [
+          "R1C1",
+          "R1C2",
+          "R1C3",
+          "R1C4",
+          "R1C5"
+        ],
+        [
+          "R2C1",
+          "R2C2",
+          "R2C3",
+          "R2C4",
+          "R2C5"
+        ],
+        [
+          "R3C1",
+          "R3C2",
+          "R3C3",
+          "R3C4",
+          "R3C5"
+        ],
+        [
+          "R4C1",
+          "R4C2",
+          "R4C3",
+          "R4C4",
+          "R4C5"
+        ],
+        [
+          "R5C1",
+          "R5C2",
+          "R5C3",
+          "R5C4",
+          "R5C5"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "Analysis of table 1 data follows.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Table 2: Sample Data",
+      "type": "heading"
+    },
+    {
+      "rows": [
+        [
+          "Column A",
+          "Column B",
+          "Column C",
+          "Column D",
+          "Column E"
+        ],
+        [
+          "R1C1",
+          "R1C2",
+          "R1C3",
+          "R1C4",
+          "R1C5"
+        ],
+        [
+          "R2C1",
+          "R2C2",
+          "R2C3",
+          "R2C4",
+          "R2C5"
+        ],
+        [
+          "R3C1",
+          "R3C2",
+          "R3C3",
+          "R3C4",
+          "R3C5"
+        ],
+        [
+          "R4C1",
+          "R4C2",
+          "R4C3",
+          "R4C4",
+          "R4C5"
+        ],
+        [
+          "R5C1",
+          "R5C2",
+          "R5C3",
+          "R5C4",
+          "R5C5"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "Analysis of table 2 data follows.",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Table 3: Sample Data",
+      "type": "heading"
+    },
+    {
+      "rows": [
+        [
+          "Column A",
+          "Column B",
+          "Column C",
+          "Column D",
+          "Column E"
+        ],
+        [
+          "R1C1",
+          "R1C2",
+          "R1C3",
+          "R1C4",
+          "R1C5"
+        ],
+        [
+          "R2C1",
+          "R2C2",
+          "R2C3",
+          "R2C4",
+          "R2C5"
+        ],
+        [
+          "R3C1",
+          "R3C2",
+          "R3C3",
+          "R3C4",
+          "R3C5"
+        ],
+        [
+          "R4C1",
+          "R4C2",
+          "R4C3",
+          "R4C4",
+          "R4C5"
+        ],
+        [
+          "R5C1",
+          "R5C2",
+          "R5C3",
+          "R5C4",
+          "R5C5"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "Analysis of table 3 data follows.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Summary Steps",
+      "type": "heading"
+    },
+    {
+      "items": [
+        {
+          "level": 0,
+          "text": "Summary step 1: Important action item"
+        },
+        {
+          "level": 1,
+          "text": "Sub-step detail"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 2: Important action item"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 3: Important action item"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 4: Important action item"
+        },
+        {
+          "level": 1,
+          "text": "Sub-step detail"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 5: Important action item"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 6: Important action item"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 7: Important action item"
+        },
+        {
+          "level": 1,
+          "text": "Sub-step detail"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 8: Important action item"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 9: Important action item"
+        },
+        {
+          "level": 0,
+          "text": "Summary step 10: Important action item"
+        },
+        {
+          "level": 1,
+          "text": "Sub-step detail"
+        }
+      ],
+      "ordered": true,
+      "type": "list"
+    },
+    {
+      "level": 1,
+      "text": "Conclusion",
+      "type": "heading"
+    },
+    {
+      "text": "This large document tests performance with 300+ paragraphs, multiple heading levels, nested lists, and multiple tables.",
+      "type": "paragraph"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 13,
+      "level_2": 53,
+      "level_3": 50,
+      "subtitle": 1,
+      "title": 1
+    },
+    "lists": {
+      "bulleted": 20,
+      "numbered": 1
+    },
+    "paragraphs": 424,
+    "tables": {
+      "count": 3,
+      "max_cols": 5,
+      "max_rows": 6
+    },
+    "warnings": []
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "blocks": [],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {},
+    "lists": {
+      "bulleted": 0,
+      "numbered": 0
+    },
+    "paragraphs": 0,
+    "tables": {
+      "count": 0,
+      "max_cols": 0,
+      "max_rows": 0
+    },
+    "warnings": []
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "blocks": [
+    {
+      "text": "Whitespace Fidelity Test",
+      "type": "title"
+    },
+    {
+      "text": "Testing tabs and soft line breaks",
+      "type": "subtitle"
+    },
+    {
+      "level": 1,
+      "text": "Tab Characters",
+      "type": "heading"
+    },
+    {
+      "text": "Column1\tColumn2\tColumn3",
+      "type": "paragraph"
+    },
+    {
+      "text": "Value A\tValue B\tValue C",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Soft Line Breaks",
+      "type": "heading"
+    },
+    {
+      "text": "Line one of the paragraph\nLine two (soft break)\nLine three (soft break)",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Mixed Whitespace",
+      "type": "heading"
+    },
+    {
+      "text": "Name\tAge\tCity\nAlice\t30\tNYC\nBob\t25\tLA",
+      "type": "paragraph"
+    },
+    {
+      "level": 2,
+      "text": "Address Block",
+      "type": "heading"
+    },
+    {
+      "text": "John Doe\n123 Main Street\nAnytown, ST 12345",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Verification",
+      "type": "heading"
+    },
+    {
+      "text": "The paragraphs above should preserve tab and line break characters in the output.",
+      "type": "paragraph"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 4,
+      "level_2": 1,
+      "subtitle": 1,
+      "title": 1
+    },
+    "lists": {
+      "bulleted": 0,
+      "numbered": 0
+    },
+    "paragraphs": 6,
+    "tables": {
+      "count": 0,
+      "max_cols": 0,
+      "max_rows": 0
+    },
+    "warnings": []
+  }
+}
