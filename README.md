@@ -1,5 +1,7 @@
 # docx2pages
 
+[![CI](https://github.com/rogu3bear/docx2pages/actions/workflows/ci.yml/badge.svg)](https://github.com/rogu3bear/docx2pages/actions/workflows/ci.yml)
+
 A macOS command-line tool that converts Word documents (.docx) to Pages documents (.pages) using a template's native styles—without style pollution.
 
 ## Overview
