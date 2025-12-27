@@ -1,0 +1,115 @@
+{
+  "blocks": [
+    {
+      "text": "Hyperlinks Test",
+      "type": "title"
+    },
+    {
+      "text": "This document tests hyperlink extraction.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Simple Links",
+      "type": "heading"
+    },
+    {
+      "links": [
+        {
+          "end": 21,
+          "start": 6,
+          "text": "Example Website",
+          "url": "https://example.com"
+        }
+      ],
+      "text": "Visit Example Website [https://example.com] for more info.",
+      "type": "paragraph"
+    },
+    {
+      "links": [
+        {
+          "end": 31,
+          "start": 14,
+          "text": "GitHub repository",
+          "url": "https://github.com/test/repo"
+        }
+      ],
+      "text": "Check out our GitHub repository [https://github.com/test/repo].",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Email Links",
+      "type": "heading"
+    },
+    {
+      "links": [
+        {
+          "end": 30,
+          "start": 14,
+          "text": "test@example.com",
+          "url": "mailto:test@example.com"
+        }
+      ],
+      "text": "Contact us at test@example.com [mailto:test@example.com] for support.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Links with Special Characters",
+      "type": "heading"
+    },
+    {
+      "links": [
+        {
+          "end": 26,
+          "start": 8,
+          "text": "documentation page",
+          "url": "https://docs.example.com/page?query=test&foo=bar"
+        }
+      ],
+      "text": "See the documentation page [https://docs.example.com/page?query=test&foo=bar] for details.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Multiple Links in Table",
+      "type": "heading"
+    },
+    {
+      "rows": [
+        [
+          "Resource",
+          "Link"
+        ],
+        [
+          "Homepage",
+          "example.com"
+        ],
+        [
+          "Docs",
+          "docs.example.com"
+        ]
+      ],
+      "type": "table"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 4,
+      "title": 1
+    },
+    "lists": {
+      "bulleted": 0,
+      "numbered": 0
+    },
+    "paragraphs": 5,
+    "tables": {
+      "count": 1,
+      "max_cols": 2,
+      "max_rows": 3
+    },
+    "warnings": []
+  }
+}

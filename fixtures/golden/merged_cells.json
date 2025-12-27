@@ -1,0 +1,121 @@
+{
+  "blocks": [
+    {
+      "text": "Merged Cells Test",
+      "type": "title"
+    },
+    {
+      "text": "This document tests table cell merge handling.",
+      "type": "paragraph"
+    },
+    {
+      "level": 1,
+      "text": "Vertical Merge (Rowspan)",
+      "type": "heading"
+    },
+    {
+      "merges": [
+        {
+          "col": 0,
+          "colspan": 1,
+          "row": 0,
+          "rowspan": 2
+        }
+      ],
+      "rows": [
+        [
+          "Header",
+          "Col2"
+        ],
+        [
+          null,
+          "Data1"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "level": 1,
+      "text": "Horizontal Merge (Colspan)",
+      "type": "heading"
+    },
+    {
+      "merges": [
+        {
+          "col": 0,
+          "colspan": 2,
+          "row": 0,
+          "rowspan": 1
+        }
+      ],
+      "rows": [
+        [
+          "Wide Header",
+          null
+        ],
+        [
+          "Col1",
+          "Col2"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "level": 1,
+      "text": "Complex Merge",
+      "type": "heading"
+    },
+    {
+      "merges": [
+        {
+          "col": 0,
+          "colspan": 1,
+          "row": 0,
+          "rowspan": 2
+        },
+        {
+          "col": 1,
+          "colspan": 2,
+          "row": 2,
+          "rowspan": 1
+        }
+      ],
+      "rows": [
+        [
+          "A",
+          "B",
+          "C"
+        ],
+        [
+          null,
+          "D",
+          "E"
+        ],
+        [
+          "F",
+          "G",
+          null
+        ]
+      ],
+      "type": "table"
+    }
+  ],
+  "stats": {
+    "dropped_breaks": 0,
+    "headings": {
+      "level_1": 3,
+      "title": 1
+    },
+    "lists": {
+      "bulleted": 0,
+      "numbered": 0
+    },
+    "paragraphs": 1,
+    "tables": {
+      "count": 3,
+      "max_cols": 3,
+      "max_rows": 3
+    },
+    "warnings": []
+  }
+}

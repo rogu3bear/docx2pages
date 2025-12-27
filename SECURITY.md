@@ -24,7 +24,9 @@ If you discover a security vulnerability in docx2pages, please report it respons
 ### File Handling
 
 - docx2pages processes untrusted DOCX files
-- The parser uses Python's stdlib `zipfile` and `xml.etree.ElementTree`
+- The parser uses Python's `zipfile` and `defusedxml` for secure XML parsing
+- XML External Entity (XXE) attacks are blocked by defusedxml
+- Control characters invalid in JSON are sanitized from text content
 - Malformed DOCX files should fail gracefully, not crash or execute code
 
 ### Automation Permissions
@@ -40,5 +42,5 @@ If you discover a security vulnerability in docx2pages, please report it respons
 
 ## Known Limitations
 
-- No XML external entity (XXE) protection beyond Python's defaults
 - Large malformed files may cause high memory usage before failing
+- Process timeout defaults to 120 seconds; very large documents may need `--timeout` adjustment

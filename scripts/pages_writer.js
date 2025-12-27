@@ -31,12 +31,20 @@ function run(argv) {
         });
     }
 
+    // Parse and validate batch size
+    let batchSize = parseInt(args['batch-size']);
+    if (isNaN(batchSize) || batchSize < 1) {
+        batchSize = DEFAULT_BATCH_SIZE;
+    } else if (batchSize > 1000) {
+        batchSize = 1000;  // Cap at reasonable maximum
+    }
+
     const options = {
         strict: args.strict || false,
         prefixDeepHeadings: args['prefix-deep-headings'] || false,
         verbose: args.verbose || false,
         tableStyle: args['table-style'] || null,
-        batchSize: parseInt(args['batch-size']) || DEFAULT_BATCH_SIZE
+        batchSize: batchSize
     };
 
     const log = (msg) => {
@@ -108,6 +116,29 @@ function run(argv) {
         const styleCache = buildStyleCache(doc, baselineStyleNames, log);
         log(`Cached ${Object.keys(styleCache).length} style references`);
 
+        // Validate template has minimum viable styles
+        const templateValidation = validateTemplateStyles(styleMap, baselineStyles, log);
+        if (!templateValidation.valid) {
+            log("Closing document due to template validation failure...");
+            doc.close({ saving: 'no' });
+            doc = null;
+
+            return JSON.stringify({
+                success: false,
+                error: "Template validation failed: " + templateValidation.errors.join("; "),
+                templateValidation: templateValidation,
+                baselineStyles: baselineStyleNames,
+                finalStyles: [],
+                pollutingStyles: [],
+                unusedBaselineStyles: []
+            });
+        }
+
+        // Add template warnings to results
+        for (const warn of templateValidation.warnings) {
+            log(`Warning: ${warn}`);
+        }
+
         log("Clearing body content...");
 
         // Clear body content
@@ -149,29 +180,40 @@ function run(argv) {
         for (let i = 0; i < blocks.length; i++) {
             const block = blocks[i];
 
+            // Null safety: skip null/undefined blocks
+            if (!block || typeof block.type !== 'string') {
+                results.warnings.push(`Block ${i} is null or has no type`);
+                continue;
+            }
+
             try {
                 switch (block.type) {
                     case 'title':
-                        bufferHeading(paragraphBuffer, block.text, 'title', styleMap, results, options, log);
+                        bufferHeading(paragraphBuffer, block.text || '', 'title', styleMap, results, options, log);
                         results.headingsWritten++;
                         break;
 
                     case 'subtitle':
-                        bufferHeading(paragraphBuffer, block.text, 'subtitle', styleMap, results, options, log);
+                        bufferHeading(paragraphBuffer, block.text || '', 'subtitle', styleMap, results, options, log);
                         results.headingsWritten++;
                         break;
 
                     case 'heading':
-                        bufferHeading(paragraphBuffer, block.text, block.level, styleMap, results, options, log);
+                        bufferHeading(paragraphBuffer, block.text || '', block.level || 1, styleMap, results, options, log);
                         results.headingsWritten++;
                         break;
 
                     case 'paragraph':
-                        bufferParagraph(paragraphBuffer, block.text, styleMap, results, log);
+                        bufferParagraph(paragraphBuffer, block.text || '', styleMap, results, log);
                         results.paragraphsWritten++;
                         break;
 
                     case 'list':
+                        // Null safety for list items
+                        if (!block.items || !Array.isArray(block.items) || block.items.length === 0) {
+                            results.warnings.push(`List block ${i} has no items`);
+                            break;
+                        }
                         bufferList(paragraphBuffer, block, styleMap, listStyles, results, log);
                         results.listsWritten++;
                         break;
@@ -402,6 +444,46 @@ function buildStyleMap(baselineStyles, options) {
     }
 
     return map;
+}
+
+/**
+ * Validate that template has minimum required styles.
+ * Returns object with validation results and warnings.
+ */
+function validateTemplateStyles(styleMap, baselineStyles, log) {
+    const validation = {
+        valid: true,
+        errors: [],
+        warnings: []
+    };
+
+    // Required: Must have a body style
+    if (!styleMap.body) {
+        validation.valid = false;
+        const availableStyles = Object.values(baselineStyles).slice(0, 10).join(', ');
+        validation.errors.push(
+            "Template missing body style. Expected one of: 'Body', 'Body Text', or 'Normal'. " +
+            "Available styles: " + availableStyles + (Object.keys(baselineStyles).length > 10 ? '...' : '')
+        );
+    }
+
+    // Recommended: At least one heading style
+    if (styleMap.maxHeadingLevel === 0) {
+        validation.warnings.push(
+            "Template has no heading styles (Heading 1, Heading 2, etc.). " +
+            "Headings will use body style as fallback."
+        );
+    }
+
+    // Recommended: Title style
+    if (!baselineStyles['title']) {
+        validation.warnings.push(
+            "Template has no 'Title' style. Title elements will use " +
+            (styleMap.headings[1] ? "'Heading 1'" : "body style") + " as fallback."
+        );
+    }
+
+    return validation;
 }
 
 function detectListStyles(baselineStyles) {
@@ -650,6 +732,10 @@ function writeTable(doc, block, styleMap, options, results, log) {
 
             for (let r = rStart; r < rEnd; r++) {
                 for (let c = 0; c < rows[r].length; c++) {
+                    // Skip null cells (merged continuations from DOCX)
+                    if (rows[r][c] === null) {
+                        continue;
+                    }
                     try {
                         const colLetters = colIndexToLetters(c);
                         const cellAddr = `${colLetters}${r + 1}`;

@@ -43,8 +43,19 @@ The result: a clean Pages document that looks like it was created natively in Pa
 
 - macOS 12.0 or later
 - Pages.app installed
-- Python 3.x (for DOCX parsing)
+- Python 3.x with `defusedxml` package (for secure DOCX parsing)
 - Swift 5.9+ toolchain (for building from source only)
+
+### Python Dependencies
+
+Install the required Python packages:
+
+```bash
+pip3 install -r requirements.txt
+# Or manually: pip3 install defusedxml
+```
+
+The `defusedxml` package provides protection against XML External Entity (XXE) attacks when parsing DOCX files.
 
 ## Installation
 
@@ -63,7 +74,18 @@ unzip docx2pages.zip
 
 The release package includes the binary and required scripts. No Swift toolchain needed.
 
-### Option 2: Build from Source
+### Option 2: Homebrew (macOS)
+
+```bash
+# Add the tap and install
+brew tap rogu3bear/docx2pages https://github.com/rogu3bear/docx2pages
+brew install docx2pages
+
+# Install required Python dependency
+pip3 install defusedxml
+```
+
+### Option 3: Build from Source
 
 ```bash
 # Clone the repository
@@ -215,6 +237,28 @@ The parser emits these block types:
 {"type": "table", "rows": [["Cell 1", "Cell 2"], ["Cell 3", "Cell 4"]]}
 {"type": "break"}
 ```
+
+**Optional metadata fields:**
+
+Paragraphs with hyperlinks include a `links` array:
+```json
+{
+  "type": "paragraph",
+  "text": "Visit Example [https://example.com] for info",
+  "links": [{"text": "Example", "url": "https://example.com", "start": 6, "end": 13}]
+}
+```
+
+Tables with merged cells include a `merges` array:
+```json
+{
+  "type": "table",
+  "rows": [["Header", null], [null, "Data"]],
+  "merges": [{"row": 0, "col": 0, "rowspan": 2, "colspan": 1}]
+}
+```
+
+Null values in table rows indicate merged cell continuations.
 
 ### Style Mapping
 
@@ -373,23 +417,33 @@ echo $?  # 0 = success
 
 ## Known Limitations
 
-1. **Merged Cells**: Table cell merging is not preserved; merged cells appear as separate cells.
+### Pages.app Automation Constraints
 
-2. **Images**: Not supported. Images in DOCX are silently dropped.
+Due to fundamental limitations in Apple's JXA (JavaScript for Automation) bridge for Pages:
 
-3. **Headers/Footers**: Not extracted or transferred.
+1. **Hyperlinks**: Extracted from DOCX and preserved in JSON metadata (`links` array), but appear as plain text with `[URL]` suffix in Pages output. The Pages JXA API does not support creating clickable hyperlinks programmatically. The JSON intermediate format contains full link information for other tooling.
 
-4. **Page Breaks**: By default, page/section breaks are dropped. Use `--preserve-breaks` to convert them to blank paragraphs.
+2. **Merged Cells**: Detected and preserved in JSON metadata (`merges` array with `rowspan`/`colspan`), but Pages tables are rendered as regular grids. The Pages JXA API does not support cell merging programmatically. Merged continuation cells appear empty in Pages output.
 
-5. **Inline Formatting**: Bold, italic, underline, etc. are not preserved. Only paragraph-level styles are applied.
+These are Apple platform limitations, not bugs in docx2pages. The JSON intermediate format is lossless for use with other tools.
 
-6. **Nested List Levels**: Nesting is represented by indentation only. True multi-level list numbering (1.1, 1.2, etc.) depends on template list style configuration.
+### Content Not Supported
 
-7. **Footnotes/Endnotes**: Not supported; silently dropped.
+3. **Images**: Not supported. Images in DOCX are silently dropped.
 
-8. **Text Boxes/Shapes**: Not supported; silently dropped.
+4. **Headers/Footers**: Not extracted or transferred.
 
-9. **Comments/Track Changes**: Not supported; silently dropped.
+5. **Page Breaks**: By default, page/section breaks are dropped. Use `--preserve-breaks` to convert them to blank paragraphs.
+
+6. **Inline Formatting**: Bold, italic, underline, etc. are not preserved. Only paragraph-level styles are applied.
+
+7. **Nested List Levels**: Nesting is represented by indentation only. True multi-level list numbering (1.1, 1.2, etc.) depends on template list style configuration.
+
+8. **Footnotes/Endnotes**: Not supported; silently dropped.
+
+9. **Text Boxes/Shapes**: Not supported; silently dropped.
+
+10. **Comments/Track Changes**: Not supported; silently dropped.
 
 ## Performance
 

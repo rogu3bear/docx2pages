@@ -1,0 +1,5 @@
+# Python dependencies for docx2pages
+# Install with: pip3 install -r requirements.txt
+
+# Required for secure XML parsing (XXE protection)
+defusedxml>=0.7.0

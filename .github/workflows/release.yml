@@ -1,0 +1,186 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.3.0)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run (skip actual release creation)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  validate:
+    name: Validate Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # Extract version from tag (remove 'v' prefix)
+            VERSION="${GITHUB_REF#refs/tags/v}"
+          else
+            # Use manual input
+            VERSION="${{ github.event.inputs.version }}"
+          fi
+
+          # Validate semver format
+          if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "ERROR: Invalid version format: $VERSION"
+            echo "Expected: X.Y.Z (e.g., 1.3.0)"
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Releasing version: $VERSION"
+
+      - name: Verify version in source
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          SOURCE_VERSION=$(grep 'version:' Sources/docx2pages/main.swift | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
+
+          if [ "$SOURCE_VERSION" != "$VERSION" ]; then
+            echo "ERROR: Version mismatch!"
+            echo "  Tag/input version: $VERSION"
+            echo "  Source version:    $SOURCE_VERSION"
+            echo ""
+            echo "Please update Sources/docx2pages/main.swift first."
+            exit 1
+          fi
+
+          echo "Version verified: $VERSION"
+
+  test:
+    name: Run Tests
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip3 install -r requirements.txt
+
+      - name: Run parser tests
+        run: |
+          for docx in fixtures/*.docx; do
+            python3 scripts/parse_docx.py "$docx" > /dev/null
+          done
+
+      - name: Run golden tests
+        run: python3 scripts/test_parser_golden.py
+
+      - name: Run edge case tests
+        run: python3 scripts/test_edge_cases.py
+
+  build:
+    name: Build Release
+    needs: [validate, test]
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build release binary
+        run: swift build -c release
+
+      - name: Verify binary
+        run: |
+          .build/release/docx2pages --version
+          .build/release/docx2pages --help
+
+      - name: Create distribution package
+        run: |
+          chmod +x scripts/package_dist.sh
+          scripts/package_dist.sh
+
+      - name: Upload distribution artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-package
+          path: dist/*.zip
+          retention-days: 7
+
+  release:
+    name: Create GitHub Release
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.dry_run != 'true' }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download distribution package
+        uses: actions/download-artifact@v4
+        with:
+          name: release-package
+          path: dist
+
+      - name: Extract changelog for release notes
+        id: changelog
+        run: |
+          VERSION="${{ needs.validate.outputs.version }}"
+
+          # Extract the section for this version from CHANGELOG.md
+          # Looks for ## [X.Y.Z] or ## X.Y.Z and captures until next ## or EOF
+          NOTES=$(awk -v ver="$VERSION" '
+            /^## \[?'"$VERSION"'\]?/ { found=1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md)
+
+          if [ -z "$NOTES" ]; then
+            NOTES="Release v$VERSION"
+          fi
+
+          # Write to file for multi-line support
+          echo "$NOTES" > release_notes.md
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ needs.validate.outputs.version }}"
+          ZIPFILE=$(ls dist/*.zip | head -1)
+
+          gh release create "v$VERSION" \
+            --title "v$VERSION" \
+            --notes-file release_notes.md \
+            --latest \
+            "$ZIPFILE"
+
+          echo "Release created: https://github.com/${{ github.repository }}/releases/tag/v$VERSION"
+
+  dry-run-summary:
+    name: Dry Run Summary
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.dry_run == 'true' }}
+    steps:
+      - name: Summary
+        run: |
+          echo "=== DRY RUN COMPLETE ==="
+          echo ""
+          echo "Version: ${{ needs.validate.outputs.version }}"
+          echo "All validations passed."
+          echo "All tests passed."
+          echo "Build succeeded."
+          echo ""
+          echo "To create the actual release, run again with dry_run=false"
+          echo "or push a tag: git tag v${{ needs.validate.outputs.version }} && git push origin v${{ needs.validate.outputs.version }}"

@@ -79,6 +79,16 @@ fi
 echo "Template: $TEMPLATE"
 echo ""
 
+# Check for required Python dependencies
+echo "Checking Python dependencies..."
+if ! python3 -c "import defusedxml" 2>/dev/null; then
+    echo -e "${RED}✗ defusedxml not installed${NC}"
+    echo "Install with: pip3 install defusedxml"
+    exit 1
+fi
+echo -e "${GREEN}✓ defusedxml installed${NC}"
+echo ""
+
 # Step 1: Build release
 if [[ "$SKIP_BUILD" == "true" ]]; then
     echo "Step 1: Skipping build (--no-build)"

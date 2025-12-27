@@ -21,6 +21,10 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install Python dependencies
+        run: |
+          pip3 install -r requirements.txt
+
       - name: Test parser on all fixtures
         run: |
           echo "Testing parser on all fixtures..."
@@ -39,9 +43,16 @@ jobs:
         run: |
           python3 scripts/test_parser_golden.py
 
+      - name: Run edge case tests
+        run: |
+          python3 scripts/test_edge_cases.py
+
   build-macos:
-    name: Build (macOS)
-    runs-on: macos-latest
+    name: Build (macOS ${{ matrix.macos }})
+    strategy:
+      matrix:
+        macos: [macos-13, macos-14]
+    runs-on: ${{ matrix.macos }}
     steps:
       - uses: actions/checkout@v4
 
@@ -73,6 +84,6 @@ jobs:
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:
-          name: docx2pages-macos
+          name: docx2pages-${{ matrix.macos }}
           path: .build/release/docx2pages
           retention-days: 7

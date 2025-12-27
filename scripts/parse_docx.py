@@ -9,8 +9,34 @@ import json
 import sys
 import argparse
 import zipfile
-import xml.etree.ElementTree as ET
+import re
 from pathlib import Path
+
+# Use defusedxml for XXE protection (REQUIRED)
+import defusedxml.ElementTree as ET
+
+# Control characters that are invalid in JSON (except tab, newline, carriage return)
+# JSON allows: \t (0x09), \n (0x0A), \r (0x0D) but requires escaping
+# JSON forbids: 0x00-0x08, 0x0B, 0x0C, 0x0E-0x1F
+CONTROL_CHAR_PATTERN = re.compile(r'[\x00-\x08\x0B\x0C\x0E-\x1F]')
+
+
+def sanitize_text(text):
+    """
+    Remove control characters that are invalid in JSON.
+
+    Preserves:
+    - Tab (\\t, 0x09)
+    - Newline (\\n, 0x0A)
+    - Carriage return (\\r, 0x0D)
+
+    Removes:
+    - Null byte (0x00)
+    - Other C0 control characters (0x01-0x08, 0x0B, 0x0C, 0x0E-0x1F)
+    """
+    if not text:
+        return text
+    return CONTROL_CHAR_PATTERN.sub('', text)
 
 # Word XML namespaces
 NAMESPACES = {
@@ -18,7 +44,38 @@ NAMESPACES = {
     'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
 }
 
-def get_text(elem):
+# Relationships namespace (different from document namespaces)
+RELS_NAMESPACE = 'http://schemas.openxmlformats.org/package/2006/relationships'
+
+
+def load_relationships(zf):
+    """
+    Load document relationships to map relationship IDs to URLs.
+
+    Returns a dict mapping rId -> URL for hyperlinks only.
+    """
+    rels = {}
+    try:
+        rels_xml = zf.read('word/_rels/document.xml.rels')
+        root = ET.fromstring(rels_xml)
+
+        for rel in root.findall(f'.//{{{RELS_NAMESPACE}}}Relationship'):
+            rid = rel.get('Id')
+            target = rel.get('Target')
+            rel_type = rel.get('Type', '')
+
+            # Only extract hyperlinks (external links)
+            if 'hyperlink' in rel_type.lower():
+                rels[rid] = target
+
+    except KeyError:
+        pass  # No relationships file
+    except ET.ParseError:
+        pass  # Malformed relationships file
+
+    return rels
+
+def get_text(elem, relationships=None, extract_links=False):
     """
     Extract all text from an element and its descendants.
     Preserves:
@@ -26,23 +83,66 @@ def get_text(elem):
     - w:tab as \t
     - w:br (soft line break, no type) as \n
     - w:cr (carriage return) as \n
+    - w:hyperlink URLs appended in markdown-style [URL]
+
+    Args:
+        elem: The XML element to extract text from
+        relationships: Optional dict mapping rId -> URL for hyperlinks
+        extract_links: If True, return (text, links) tuple with structured link metadata
+
+    Returns:
+        If extract_links=False: sanitized text string
+        If extract_links=True: tuple of (text, links) where links is a list of
+            {"text": str, "url": str, "start": int, "end": int} or None if no links
     """
     texts = []
+    links = []  # Collect structured link metadata
 
-    # Iterate through all children in document order
-    for child in elem.iter():
-        tag = child.tag.replace('{%s}' % NAMESPACES['w'], '')
+    def process_element(el):
+        """Recursively process element and its children."""
+        tag = el.tag.replace('{%s}' % NAMESPACES['w'], '')
 
-        if tag == 't':
+        if tag == 'hyperlink':
+            # Start of hyperlink - get relationship ID
+            rid = el.get('{%s}id' % NAMESPACES['r'])
+
+            # Record position before link text
+            link_text_start = len(''.join(texts))
+
+            # Process children (the text content of the link)
+            for child in el:
+                process_element(child)
+
+            # Record position after link text
+            link_text_end = len(''.join(texts))
+            link_text = ''.join(texts)[link_text_start:link_text_end]
+
+            # After processing children, append URL if we have it
+            if rid and relationships and rid in relationships:
+                url = relationships[rid]
+                texts.append(f' [{url}]')
+
+                # Record structured link metadata
+                if extract_links and link_text:
+                    links.append({
+                        'text': link_text,
+                        'url': url,
+                        'start': link_text_start,
+                        'end': link_text_end
+                    })
+
+            return  # Don't process children again
+
+        elif tag == 't':
             # Text content
-            if child.text:
-                texts.append(child.text)
+            if el.text:
+                texts.append(el.text)
         elif tag == 'tab':
             # Tab character
             texts.append('\t')
         elif tag == 'br':
             # Break - check type
-            br_type = child.get('{%s}type' % NAMESPACES['w'])
+            br_type = el.get('{%s}type' % NAMESPACES['w'])
             if br_type is None:
                 # Soft line break (no type attribute) -> newline
                 texts.append('\n')
@@ -51,7 +151,19 @@ def get_text(elem):
             # Carriage return
             texts.append('\n')
 
-    return ''.join(texts)
+        # Process children for non-hyperlink elements
+        for child in el:
+            process_element(child)
+
+    # Start recursive processing
+    process_element(elem)
+
+    # Sanitize to remove invalid JSON control characters
+    result_text = sanitize_text(''.join(texts))
+
+    if extract_links:
+        return result_text, links if links else None
+    return result_text
 
 def count_breaks_in_paragraph(para):
     """Count page breaks and section breaks in a paragraph."""
@@ -230,21 +342,124 @@ def get_paragraph_style_id(para):
         return None
     return pStyle.get('{%s}val' % NAMESPACES['w'])
 
-def parse_table(table_elem):
-    """Parse a table element into rows of cell texts."""
+def parse_table(table_elem, relationships=None):
+    """
+    Parse a table element into rows of cell texts with merge metadata.
+
+    Handles merged cells:
+    - w:vMerge: Vertical merge (rowspan)
+      - w:val="restart" starts a new merge
+      - No w:val or w:val="continue" continues from cell above
+    - w:gridSpan: Horizontal span (colspan)
+      - w:val="N" means cell spans N columns
+
+    Returns a tuple (rows, merges) where:
+    - rows: 2D array with regular cells containing text, merged continuations as None
+    - merges: List of merge descriptors or None if no merges
+      Each merge: {"row": int, "col": int, "rowspan": int, "colspan": int}
+    """
     rows = []
-    for tr in table_elem.findall('w:tr', NAMESPACES):
+    merges = []
+
+    # Track vertical merge starts: col_idx -> (start_row, colspan)
+    vmerge_starts = {}
+
+    for row_idx, tr in enumerate(table_elem.findall('w:tr', NAMESPACES)):
         row = []
+        col_idx = 0
+
         for tc in tr.findall('w:tc', NAMESPACES):
-            # Get all paragraphs in cell
+            # Get cell properties
+            tcPr = tc.find('w:tcPr', NAMESPACES)
+
+            # Handle horizontal span (gridSpan)
+            grid_span = 1
+            if tcPr is not None:
+                gs = tcPr.find('w:gridSpan', NAMESPACES)
+                if gs is not None:
+                    try:
+                        grid_span = int(gs.get('{%s}val' % NAMESPACES['w'], '1'))
+                    except (ValueError, TypeError):
+                        grid_span = 1
+
+            # Handle vertical merge
+            vmerge = None
+            if tcPr is not None:
+                vm = tcPr.find('w:vMerge', NAMESPACES)
+                if vm is not None:
+                    # Get merge type: "restart" starts a new merge, anything else continues
+                    vmerge = vm.get('{%s}val' % NAMESPACES['w'], 'continue')
+
+            # Get cell text content
             cell_texts = []
             for p in tc.findall('w:p', NAMESPACES):
-                text = get_text(p)
+                text = get_text(p, relationships)
                 if text:
                     cell_texts.append(text)
-            row.append('\n'.join(cell_texts))
+            cell_text = '\n'.join(cell_texts)
+
+            # Track merges and determine cell output
+            if vmerge == 'restart':
+                # Start of a vertical merge
+                row.append(cell_text)
+                vmerge_starts[col_idx] = (row_idx, grid_span)
+            elif vmerge is not None:
+                # Continuation of vertical merge - output None
+                row.append(None)
+                # Update the merge descriptor when we reach the end
+            else:
+                # Regular cell (no vertical merge)
+                row.append(cell_text)
+
+                # If there was a vertical merge ending at the previous row, finalize it
+                if col_idx in vmerge_starts:
+                    start_row, start_colspan = vmerge_starts[col_idx]
+                    rowspan = row_idx - start_row
+                    if rowspan > 1:
+                        merges.append({
+                            'row': start_row,
+                            'col': col_idx,
+                            'rowspan': rowspan,
+                            'colspan': start_colspan
+                        })
+                    del vmerge_starts[col_idx]
+
+            # Record colspan merge (if > 1)
+            if grid_span > 1 and vmerge != 'continue':
+                # Only record colspan for non-continuation cells
+                if vmerge == 'restart':
+                    # Will be recorded when vmerge ends
+                    pass
+                else:
+                    merges.append({
+                        'row': row_idx,
+                        'col': col_idx,
+                        'rowspan': 1,
+                        'colspan': grid_span
+                    })
+
+            col_idx += 1
+
+            # Handle gridSpan - add None for additional spanned columns
+            for _ in range(grid_span - 1):
+                row.append(None)
+                col_idx += 1
+
         rows.append(row)
-    return rows
+
+    # Finalize any remaining vertical merges (that extend to the last row)
+    num_rows = len(rows)
+    for col_idx, (start_row, start_colspan) in vmerge_starts.items():
+        rowspan = num_rows - start_row
+        if rowspan > 1:
+            merges.append({
+                'row': start_row,
+                'col': col_idx,
+                'rowspan': rowspan,
+                'colspan': start_colspan
+            })
+
+    return rows, merges if merges else None
 
 def parse_docx(docx_path, verbose=False, preserve_breaks=False):
     """
@@ -305,6 +520,9 @@ def parse_docx(docx_path, verbose=False, preserve_breaks=False):
                 numbering_xml = zf.read('word/numbering.xml')
             except Exception as e:
                 stats['warnings'].append(f'Error reading numbering.xml: {e}')
+
+        # Load relationships for hyperlinks
+        relationships = load_relationships(zf)
     finally:
         zf.close()
 
@@ -368,7 +586,7 @@ def parse_docx(docx_path, verbose=False, preserve_breaks=False):
                     stats['dropped_breaks'] += break_count
 
             # Paragraph
-            text = get_text(child)
+            text, links = get_text(child, relationships, extract_links=True)
             style_id = get_paragraph_style_id(child)
             list_info = get_list_info(child, numbering_info)
 
@@ -386,10 +604,13 @@ def parse_docx(docx_path, verbose=False, preserve_breaks=False):
                     }
                     current_list_identity = list_identity
 
-                current_list['items'].append({
+                item = {
                     'text': text,
                     'level': list_info['ilvl']
-                })
+                }
+                if links:
+                    item['links'] = links
+                current_list['items'].append(item)
                 continue
 
             # Not a list item, flush any pending list
@@ -421,6 +642,10 @@ def parse_docx(docx_path, verbose=False, preserve_breaks=False):
                 block = {'type': 'paragraph', 'text': text}
                 stats['paragraphs'] += 1
 
+            # Add links metadata if present
+            if links:
+                block['links'] = links
+
             # Skip empty paragraphs (but keep them for spacing)
             if text.strip() or block['type'] in ('heading', 'title', 'subtitle'):
                 blocks.append(block)
@@ -429,8 +654,10 @@ def parse_docx(docx_path, verbose=False, preserve_breaks=False):
             # Table - flush any pending list first
             flush_list()
 
-            rows = parse_table(child)
+            rows, merges = parse_table(child, relationships)
             block = {'type': 'table', 'rows': rows}
+            if merges:
+                block['merges'] = merges
             blocks.append(block)
 
             stats['tables']['count'] += 1

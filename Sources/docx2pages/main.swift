@@ -58,8 +58,49 @@ struct Docx2Pages: ParsableCommand {
     @Option(name: .long, help: "Directory containing scripts (parse_docx.py, pages_writer.js)")
     var scriptsDir: String?
 
+    @Option(name: .long, help: "Process timeout in seconds (default: 120)")
+    var timeout: Int = 120
+
     // Lock file descriptor for concurrency safety
     private static var lockFd: Int32 = -1
+
+    mutating func validate() throws {
+        // Validate batch size
+        if batchSize < 1 || batchSize > 1000 {
+            throw ValidationError("--batch-size must be between 1 and 1000 (got \(batchSize))")
+        }
+
+        // Validate timeout
+        if timeout < 1 || timeout > 3600 {
+            throw ValidationError("--timeout must be between 1 and 3600 seconds (got \(timeout))")
+        }
+    }
+
+    // Lock info for stale detection
+    private struct LockInfo: Codable {
+        let pid: Int32
+        let startTime: Date
+        let command: String
+
+        var isStale: Bool {
+            // Check if PID is still running
+            if kill(pid, 0) != 0 && errno == ESRCH {
+                return true  // Process doesn't exist
+            }
+            return false
+        }
+
+        var ageDescription: String {
+            let age = Date().timeIntervalSince(startTime)
+            if age < 60 {
+                return "\(Int(age))s ago"
+            } else if age < 3600 {
+                return "\(Int(age / 60))m ago"
+            } else {
+                return "\(Int(age / 3600))h ago"
+            }
+        }
+    }
 
     func run() throws {
         let startTime = Date()
@@ -318,30 +359,189 @@ struct Docx2Pages: ParsableCommand {
         return nil
     }
 
-    private func acquireLock(blocking: Bool) throws {
-        let lockPath = "/tmp/docx2pages.lock"
-        let fd = open(lockPath, O_CREAT | O_RDWR, 0o644)
-        guard fd >= 0 else {
-            throw ValidationError("Could not create lock file: \(lockPath)")
+    private func findPython3() -> String? {
+        // Priority 1: Check PYTHON3 environment variable
+        if let envPython = ProcessInfo.processInfo.environment["PYTHON3"],
+           FileManager.default.fileExists(atPath: envPython) {
+            return envPython
         }
 
-        // Try to acquire exclusive lock
-        let lockFlags: Int32 = blocking ? LOCK_EX : (LOCK_EX | LOCK_NB)
-        let result = flock(fd, lockFlags)
+        // Priority 2: Use 'which python3' to find it in PATH
+        let whichProcess = Process()
+        whichProcess.executableURL = URL(fileURLWithPath: "/usr/bin/which")
+        whichProcess.arguments = ["python3"]
+
+        let pipe = Pipe()
+        whichProcess.standardOutput = pipe
+        whichProcess.standardError = FileHandle.nullDevice
+
+        do {
+            try whichProcess.run()
+            whichProcess.waitUntilExit()
+
+            if whichProcess.terminationStatus == 0 {
+                let data = pipe.fileHandleForReading.readDataToEndOfFile()
+                if let path = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
+                   !path.isEmpty {
+                    return path
+                }
+            }
+        } catch {
+            // Fall through to hardcoded paths
+        }
+
+        // Priority 3: Common hardcoded locations as fallback
+        let possiblePaths = [
+            "/opt/homebrew/bin/python3",      // Apple Silicon Homebrew
+            "/usr/local/bin/python3",          // Intel Homebrew
+            "/usr/bin/python3",                // System Python
+            "/Library/Frameworks/Python.framework/Versions/Current/bin/python3"
+        ]
+
+        for path in possiblePaths {
+            if FileManager.default.fileExists(atPath: path) {
+                return path
+            }
+        }
+
+        return nil
+    }
+
+    /// Runs a process with a timeout, killing it if it exceeds the limit.
+    private func runWithTimeout(_ process: Process, timeout: TimeInterval, processName: String) throws -> Int32 {
+        try process.run()
+
+        let timeoutWorkItem = DispatchWorkItem {
+            if process.isRunning {
+                process.terminate()
+                Thread.sleep(forTimeInterval: 0.5)
+                if process.isRunning {
+                    kill(process.processIdentifier, SIGKILL)
+                }
+            }
+        }
+
+        DispatchQueue.global().asyncAfter(deadline: .now() + timeout, execute: timeoutWorkItem)
+        process.waitUntilExit()
+        timeoutWorkItem.cancel()
+
+        // Check if we terminated due to timeout (SIGTERM=15, SIGKILL=9 shows as 137)
+        if process.terminationStatus == 15 || process.terminationStatus == 137 || process.terminationStatus == 9 {
+            throw ValidationError("\(processName) timed out after \(Int(timeout)) seconds")
+        }
+
+        return process.terminationStatus
+    }
+
+    private func acquireLock(blocking: Bool) throws {
+        let lockPath = "/tmp/docx2pages.lock"
+
+        // Try atomic creation first (O_EXCL ensures only one process creates)
+        var fd = open(lockPath, O_CREAT | O_EXCL | O_RDWR, 0o644)
+
+        if fd < 0 && errno == EEXIST {
+            // Lock file already exists - open existing file
+            fd = open(lockPath, O_RDWR)
+        }
+
+        guard fd >= 0 else {
+            let errorMsg = String(cString: strerror(errno))
+            throw ValidationError("Could not open lock file '\(lockPath)': \(errorMsg)")
+        }
+
+        // Try non-blocking first to check for stale locks
+        var result = flock(fd, LOCK_EX | LOCK_NB)
+
+        if result != 0 && errno == EWOULDBLOCK {
+            // Lock is held - check if it's stale
+            if let existingLock = readLockInfo(fd: fd), existingLock.isStale {
+                // Stale lock detected - force release
+                FileHandle.standardError.write(
+                    "Clearing stale lock from PID \(existingLock.pid) (started \(existingLock.ageDescription))\n".data(using: .utf8)!
+                )
+                // Truncate and retry
+                ftruncate(fd, 0)
+                result = flock(fd, LOCK_EX | LOCK_NB)
+            }
+        }
+
+        if result != 0 && errno == EWOULDBLOCK {
+            // Still can't get lock
+            if blocking {
+                // Show waiting message with lock holder info
+                if let info = readLockInfo(fd: fd) {
+                    FileHandle.standardError.write(
+                        "Waiting for lock held by PID \(info.pid) (started \(info.ageDescription))...\n".data(using: .utf8)!
+                    )
+                }
+                result = flock(fd, LOCK_EX)  // Blocking wait
+            } else {
+                close(fd)
+                if let info = readLockInfo(fd: fd) {
+                    throw ValidationError(
+                        "Lock held by PID \(info.pid) (started \(info.ageDescription)). " +
+                        "Use without --no-wait to wait, or use --no-lock to skip."
+                    )
+                }
+                throw ValidationError(
+                    "Another docx2pages process is running. " +
+                    "Use without --no-wait to wait, or use --no-lock to skip locking."
+                )
+            }
+        }
 
         if result != 0 {
             close(fd)
-            if !blocking && errno == EWOULDBLOCK {
-                throw ValidationError("Another docx2pages process is running. Use without --no-wait to wait, or use --no-lock to skip locking.")
-            }
-            throw ValidationError("Could not acquire lock. Another docx2pages process may be running.")
+            throw ValidationError("Could not acquire lock: \(String(cString: strerror(errno)))")
         }
+
+        // Write our lock info
+        writeLockInfo(fd: fd)
 
         Docx2Pages.lockFd = fd
     }
 
+    private func readLockInfo(fd: Int32) -> LockInfo? {
+        // Seek to beginning
+        lseek(fd, 0, SEEK_SET)
+
+        // Read up to 1KB
+        var buffer = [UInt8](repeating: 0, count: 1024)
+        let bytesRead = read(fd, &buffer, buffer.count)
+
+        guard bytesRead > 0 else { return nil }
+
+        let data = Data(buffer.prefix(Int(bytesRead)))
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try? decoder.decode(LockInfo.self, from: data)
+    }
+
+    private func writeLockInfo(fd: Int32) {
+        let info = LockInfo(
+            pid: getpid(),
+            startTime: Date(),
+            command: CommandLine.arguments.joined(separator: " ")
+        )
+
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        guard let data = try? encoder.encode(info) else { return }
+
+        // Seek to beginning and truncate
+        lseek(fd, 0, SEEK_SET)
+        ftruncate(fd, 0)
+
+        // Write lock info
+        data.withUnsafeBytes { ptr in
+            _ = write(fd, ptr.baseAddress, data.count)
+        }
+    }
+
     private func releaseLock() {
         if Docx2Pages.lockFd >= 0 {
+            // Clear lock file content before releasing
+            ftruncate(Docx2Pages.lockFd, 0)
             flock(Docx2Pages.lockFd, LOCK_UN)
             close(Docx2Pages.lockFd)
             Docx2Pages.lockFd = -1
@@ -351,8 +551,10 @@ struct Docx2Pages: ParsableCommand {
     private func prepareTempOutput(from template: URL, finalOutput: URL) throws -> URL {
         let fm = FileManager.default
 
-        // Create temp path next to final output
-        let tempName = ".\(finalOutput.lastPathComponent).tmp"
+        // Create unique temp path with PID and UUID to prevent collisions
+        let pid = ProcessInfo.processInfo.processIdentifier
+        let uuid = UUID().uuidString.prefix(8)
+        let tempName = ".\(finalOutput.lastPathComponent).\(pid).\(uuid).tmp"
         let tempURL = finalOutput.deletingLastPathComponent().appendingPathComponent(tempName)
 
         // Remove existing temp if present
@@ -400,6 +602,12 @@ struct Docx2Pages: ParsableCommand {
     }
 
     private func parseDocx(inputURL: URL, verboseLog: (String) -> Void) throws -> ParseResult {
+        // Find Python 3
+        guard let python3Path = findPython3() else {
+            throw ValidationError("Python 3 not found. Install Python 3 or set PYTHON3 environment variable.")
+        }
+        verboseLog("Using Python: \(python3Path)")
+
         // Find the Python parser script
         let scriptPath = findScript("parse_docx.py")
 
@@ -417,9 +625,9 @@ struct Docx2Pages: ParsableCommand {
             try? FileManager.default.removeItem(at: blocksFile)
         }
 
-        // Run Python parser
+        // Run Python parser with timeout
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/python3")
+        process.executableURL = URL(fileURLWithPath: python3Path)
         process.arguments = [scriptPath, inputURL.path, "-o", blocksFile.path]
 
         if verbose {
@@ -433,10 +641,9 @@ struct Docx2Pages: ParsableCommand {
         let errorPipe = Pipe()
         process.standardError = errorPipe
 
-        try process.run()
-        process.waitUntilExit()
+        let status = try runWithTimeout(process, timeout: TimeInterval(timeout), processName: "DOCX parser")
 
-        if process.terminationStatus != 0 {
+        if status != 0 {
             let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
             let errorMessage = String(data: errorData, encoding: .utf8) ?? "Unknown error"
             throw ValidationError("DOCX parsing failed: \(errorMessage)")
@@ -514,8 +721,7 @@ struct Docx2Pages: ParsableCommand {
 
         verboseLog("Running Pages automation...")
 
-        try process.run()
-        process.waitUntilExit()
+        _ = try runWithTimeout(process, timeout: TimeInterval(timeout), processName: "Pages automation")
 
         let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
         let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()

@@ -525,6 +525,221 @@ def create_whitespace_fixture():
     body = '\n'.join(body_parts)
     create_docx("whitespace.docx", body)
 
+def make_hyperlink(text, rid):
+    """Create a hyperlink XML element referencing a relationship ID."""
+    return f'''<w:hyperlink xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="{rid}">
+      <w:r><w:t>{escape_xml(text)}</w:t></w:r>
+    </w:hyperlink>'''
+
+
+def make_paragraph_with_hyperlink(text_before, link_text, rid, text_after=""):
+    """Create a paragraph containing a hyperlink."""
+    parts = []
+    if text_before:
+        parts.append(f'<w:r><w:t xml:space="preserve">{escape_xml(text_before)}</w:t></w:r>')
+    parts.append(make_hyperlink(link_text, rid))
+    if text_after:
+        parts.append(f'<w:r><w:t xml:space="preserve">{escape_xml(text_after)}</w:t></w:r>')
+    return f'<w:p xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">{" ".join(parts)}</w:p>'
+
+
+def create_docx_with_hyperlinks(filename, body_content, hyperlinks):
+    """
+    Create a DOCX file with hyperlinks.
+
+    hyperlinks is a dict mapping rId -> URL
+    """
+    filepath = FIXTURES_DIR / filename
+
+    # Build document relationships XML with hyperlinks
+    rels_parts = [
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
+        '  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>',
+        '  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering" Target="numbering.xml"/>',
+    ]
+    for rid, url in hyperlinks.items():
+        rels_parts.append(f'  <Relationship Id="{rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="{escape_xml(url)}" TargetMode="External"/>')
+    rels_parts.append('</Relationships>')
+    doc_rels = '\n'.join(rels_parts)
+
+    with zipfile.ZipFile(filepath, 'w', zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr('[Content_Types].xml', CONTENT_TYPES_XML)
+        zf.writestr('_rels/.rels', RELS_XML)
+        zf.writestr('word/_rels/document.xml.rels', doc_rels)
+        zf.writestr('word/styles.xml', STYLES_XML)
+        zf.writestr('word/numbering.xml', NUMBERING_XML)
+        zf.writestr('word/document.xml', make_document(body_content))
+
+    print(f"Created: {filepath}")
+
+
+def make_table_with_merges(rows, merges=None):
+    """
+    Create a table XML element with merged cells.
+
+    rows: 2D array of cell contents
+    merges: list of dicts describing merges:
+        {'row': 0, 'col': 0, 'rowspan': 2, 'colspan': 1}
+    """
+    if merges is None:
+        merges = []
+
+    # Build merge map for easy lookup
+    # Key: (row, col), Value: {'vmerge': 'restart'|'continue'|None, 'gridSpan': N}
+    merge_map = {}
+    for merge in merges:
+        r, c = merge['row'], merge['col']
+        rowspan = merge.get('rowspan', 1)
+        colspan = merge.get('colspan', 1)
+
+        for dr in range(rowspan):
+            for dc in range(colspan):
+                key = (r + dr, c + dc)
+                cell_props = {}
+
+                if rowspan > 1:
+                    if dr == 0:
+                        cell_props['vmerge'] = 'restart'
+                    else:
+                        cell_props['vmerge'] = 'continue'
+
+                if colspan > 1 and dc == 0:
+                    cell_props['gridSpan'] = colspan
+
+                if dc > 0:
+                    cell_props['skip'] = True  # Don't output this cell (covered by gridSpan)
+
+                merge_map[key] = cell_props
+
+    table_rows = []
+    for row_idx, row in enumerate(rows):
+        cells_xml = []
+        col_idx = 0
+        for cell in row:
+            key = (row_idx, col_idx)
+            props = merge_map.get(key, {})
+
+            if props.get('skip'):
+                col_idx += 1
+                continue
+
+            # Build cell properties
+            tc_pr_parts = []
+            if props.get('gridSpan'):
+                tc_pr_parts.append(f'<w:gridSpan w:val="{props["gridSpan"]}"/>')
+            if props.get('vmerge'):
+                if props['vmerge'] == 'restart':
+                    tc_pr_parts.append('<w:vMerge w:val="restart"/>')
+                else:
+                    tc_pr_parts.append('<w:vMerge/>')
+
+            tc_pr = f'<w:tcPr>{"".join(tc_pr_parts)}</w:tcPr>' if tc_pr_parts else ''
+
+            # Cell content (may be empty for merge continuations)
+            content = cell if props.get('vmerge') != 'continue' else ''
+            cell_xml = f'<w:tc>{tc_pr}<w:p><w:r><w:t>{escape_xml(str(content))}</w:t></w:r></w:p></w:tc>'
+            cells_xml.append(cell_xml)
+            col_idx += 1
+
+        table_rows.append(f'<w:tr>{"".join(cells_xml)}</w:tr>')
+
+    return f'<w:tbl><w:tblPr/><w:tblGrid/>{"".join(table_rows)}</w:tbl>'
+
+
+def create_merged_cells_fixture():
+    """Fixture: Tables with various merged cell configurations."""
+    body_parts = [
+        make_paragraph("Merged Cells Test", "Title"),
+        make_paragraph("This document tests table cell merge handling.", "Normal"),
+
+        make_paragraph("Vertical Merge (Rowspan)", "Heading1"),
+    ]
+
+    # Table with vertical merge: first column spans 2 rows
+    # | Header | Col2 |
+    # | (merged) | Data1 |
+    body_parts.append(make_table_with_merges(
+        [
+            ["Header", "Col2"],
+            ["", "Data1"],
+        ],
+        [{'row': 0, 'col': 0, 'rowspan': 2, 'colspan': 1}]
+    ))
+
+    body_parts.append(make_paragraph("Horizontal Merge (Colspan)", "Heading1"))
+
+    # Table with horizontal merge: first row spans 2 columns
+    # | Wide Header (spans 2) |
+    # | Col1 | Col2 |
+    body_parts.append(make_table_with_merges(
+        [
+            ["Wide Header", ""],
+            ["Col1", "Col2"],
+        ],
+        [{'row': 0, 'col': 0, 'rowspan': 1, 'colspan': 2}]
+    ))
+
+    body_parts.append(make_paragraph("Complex Merge", "Heading1"))
+
+    # Table with both types:
+    # | A (spans 2 rows) | B | C |
+    # |                  | D | E |
+    # | F | G (spans 2 cols) |
+    body_parts.append(make_table_with_merges(
+        [
+            ["A", "B", "C"],
+            ["", "D", "E"],
+            ["F", "G", ""],
+        ],
+        [
+            {'row': 0, 'col': 0, 'rowspan': 2, 'colspan': 1},
+            {'row': 2, 'col': 1, 'rowspan': 1, 'colspan': 2},
+        ]
+    ))
+
+    body = '\n'.join(body_parts)
+    create_docx("merged_cells.docx", body)
+
+
+def create_hyperlinks_fixture():
+    """Fixture: Document with various hyperlinks."""
+    hyperlinks = {
+        'rId10': 'https://example.com',
+        'rId11': 'https://github.com/test/repo',
+        'rId12': 'mailto:test@example.com',
+        'rId13': 'https://docs.example.com/page?query=test&foo=bar',
+    }
+
+    body_parts = [
+        make_paragraph("Hyperlinks Test", "Title"),
+        make_paragraph("This document tests hyperlink extraction.", "Normal"),
+
+        make_paragraph("Simple Links", "Heading1"),
+        make_paragraph_with_hyperlink("Visit ", "Example Website", "rId10", " for more info."),
+        make_paragraph_with_hyperlink("Check out our ", "GitHub repository", "rId11", "."),
+
+        make_paragraph("Email Links", "Heading1"),
+        make_paragraph_with_hyperlink("Contact us at ", "test@example.com", "rId12", " for support."),
+
+        make_paragraph("Links with Special Characters", "Heading1"),
+        make_paragraph_with_hyperlink("See the ", "documentation page", "rId13", " for details."),
+
+        make_paragraph("Multiple Links in Table", "Heading1"),
+    ]
+
+    # Table with hyperlinks - simplified as regular table for now
+    # (hyperlinks in table cells require more complex structure)
+    body_parts.append(make_table([
+        ["Resource", "Link"],
+        ["Homepage", "example.com"],
+        ["Docs", "docs.example.com"],
+    ]))
+
+    body = '\n'.join(body_parts)
+    create_docx_with_hyperlinks("hyperlinks.docx", body, hyperlinks)
+
+
 def main():
     # Create fixtures directory
     FIXTURES_DIR.mkdir(parents=True, exist_ok=True)
@@ -542,9 +757,11 @@ def main():
     create_empty_fixture()
     create_minimal_fixture()
     create_whitespace_fixture()
+    create_hyperlinks_fixture()
+    create_merged_cells_fixture()
 
     print()
-    print("Done! Created 9 test fixtures.")
+    print("Done! Created 11 test fixtures.")
 
 if __name__ == '__main__':
     main()
