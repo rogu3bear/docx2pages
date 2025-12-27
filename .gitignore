@@ -36,3 +36,6 @@ venv/
 # Temporary files
 *.tmp
 *.temp
+
+# Local test files
+testdata/
