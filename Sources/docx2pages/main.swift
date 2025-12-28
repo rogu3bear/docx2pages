@@ -49,6 +49,9 @@ struct Docx2Pages: ParsableCommand {
     @Flag(name: .long, help: "Fail immediately if lock is held (don't wait)")
     var noWait: Bool = false
 
+    @Flag(name: .long, help: "Skip style API (macOS 26+ compatibility, outputs plain text)")
+    var forceText: Bool = false
+
     @Option(name: .long, help: "Write JSON summary to file (use '-' for stdout)")
     var jsonSummary: String?
 
@@ -552,9 +555,10 @@ struct Docx2Pages: ParsableCommand {
         let fm = FileManager.default
 
         // Create unique temp path with PID and UUID to prevent collisions
+        // Keep .pages extension for macOS 26+ JXA compatibility
         let pid = ProcessInfo.processInfo.processIdentifier
         let uuid = UUID().uuidString.prefix(8)
-        let tempName = ".\(finalOutput.lastPathComponent).\(pid).\(uuid).tmp"
+        let tempName = ".\(finalOutput.deletingPathExtension().lastPathComponent).\(pid).\(uuid).pages"
         let tempURL = finalOutput.deletingLastPathComponent().appendingPathComponent(tempName)
 
         // Remove existing temp if present
@@ -707,6 +711,10 @@ struct Docx2Pages: ParsableCommand {
         if batchSize != 50 {
             args.append("--batch-size")
             args.append(String(batchSize))
+        }
+
+        if forceText {
+            args.append("--force-text")
         }
 
         // Run JXA script via osascript

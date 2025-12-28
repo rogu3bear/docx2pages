@@ -44,7 +44,8 @@ function run(argv) {
         prefixDeepHeadings: args['prefix-deep-headings'] || false,
         verbose: args.verbose || false,
         tableStyle: args['table-style'] || null,
-        batchSize: batchSize
+        batchSize: batchSize,
+        forceText: args['force-text'] || false  // Bypass broken style API on macOS 26+
     };
 
     const log = (msg) => {
@@ -86,20 +87,42 @@ function run(argv) {
 
         // Open the document (this is already a COPY of the template, made by Swift)
         const docFile = Path(args.doc);
-        doc = pages.open(docFile);
-        delay(0.5);
+        try {
+            pages.open(docFile);  // Note: return value may be null on macOS 26+
+        } catch (openErr) {
+            log(`Warning: pages.open() threw error: ${openErr}`);
+        }
+        delay(1.5);  // Longer delay for macOS 26+
+
+        // Workaround for macOS 26+ JXA bug: access document via index instead of open() return value
+        if (pages.documents.length > 0) {
+            doc = pages.documents[0];
+            log(`Accessed document via documents[0]: ${doc.name()}`);
+        }
+
+        if (!doc) {
+            throw new Error(`Failed to open document - no document available after open(). Documents count: ${pages.documents.length}`);
+        }
 
         // Capture baseline styles IMMEDIATELY after open
         const baselineStyles = {};
-        try {
-            const styles = doc.paragraphStyles();
-            for (let i = 0; i < styles.length; i++) {
-                const styleName = styles[i].name();
-                baselineStyles[styleName.toLowerCase()] = styleName;
-                baselineStyleNames.push(styleName);
+        let styleEnumerationFailed = false;
+
+        if (options.forceText) {
+            log(`Force-text mode: skipping style enumeration (macOS 26+ compatibility)`);
+            styleEnumerationFailed = true;
+        } else {
+            try {
+                const styles = doc.paragraphStyles();
+                for (let i = 0; i < styles.length; i++) {
+                    const styleName = styles[i].name();
+                    baselineStyles[styleName.toLowerCase()] = styleName;
+                    baselineStyleNames.push(styleName);
+                }
+            } catch (e) {
+                log(`Warning: Could not enumerate styles: ${e}`);
+                styleEnumerationFailed = true;
             }
-        } catch (e) {
-            log(`Warning: Could not enumerate styles: ${e}`);
         }
 
         log(`Baseline styles: ${baselineStyleNames.join(', ')}`);
@@ -116,22 +139,28 @@ function run(argv) {
         const styleCache = buildStyleCache(doc, baselineStyleNames, log);
         log(`Cached ${Object.keys(styleCache).length} style references`);
 
-        // Validate template has minimum viable styles
-        const templateValidation = validateTemplateStyles(styleMap, baselineStyles, log);
-        if (!templateValidation.valid) {
-            log("Closing document due to template validation failure...");
-            doc.close({ saving: 'no' });
-            doc = null;
+        // Validate template has minimum viable styles (skip if forceText or styles couldn't be enumerated)
+        let templateValidation = { valid: true, errors: [], warnings: [] };
+        if (styleEnumerationFailed) {
+            log(`Skipping template validation (style enumeration unavailable)`);
+            templateValidation.warnings.push("Style API unavailable - content will be written as plain text");
+        } else {
+            templateValidation = validateTemplateStyles(styleMap, baselineStyles, log);
+            if (!templateValidation.valid) {
+                log("Closing document due to template validation failure...");
+                doc.close({ saving: 'no' });
+                doc = null;
 
-            return JSON.stringify({
-                success: false,
-                error: "Template validation failed: " + templateValidation.errors.join("; "),
-                templateValidation: templateValidation,
-                baselineStyles: baselineStyleNames,
-                finalStyles: [],
-                pollutingStyles: [],
-                unusedBaselineStyles: []
-            });
+                return JSON.stringify({
+                    success: false,
+                    error: "Template validation failed: " + templateValidation.errors.join("; "),
+                    templateValidation: templateValidation,
+                    baselineStyles: baselineStyleNames,
+                    finalStyles: [],
+                    pollutingStyles: [],
+                    unusedBaselineStyles: []
+                });
+            }
         }
 
         // Add template warnings to results
