@@ -6,7 +6,7 @@ A macOS command-line tool that converts Word documents (.docx) to Pages document
 
 ## Overview
 
-> **⚠️ macOS 26+ Users:** Apple's JXA APIs are currently broken on macOS 26.1+. Use `--force-text` flag as a workaround (outputs plain text without styling). We're designing a proper fix—see [Troubleshooting](#macos-26-compatibility-issues).
+> **ℹ️ macOS 26+ Users:** This tool automatically uses an HTML-based pipeline on macOS 26+ to work around broken JXA APIs. Styled output works, but template styles are not applied—semantic HTML styling is used instead. See [macOS 26+ Compatibility](#macos-26-compatibility-issues) for details.
 
 When you open a .docx file directly in Pages, it imports the Word styles, creating duplicates and "imported" variants that pollute your style list. This tool avoids that by:
 
@@ -204,6 +204,8 @@ For native list rendering, include these paragraph styles in your template:
 
 ### Architecture
 
+**Standard Pipeline (macOS 12-15):**
+
 ```
 ┌─────────────┐      ┌──────────────┐      ┌─────────────────┐
 │  DOCX File  │─────▶│ Python Parser │─────▶│  JSON Blocks    │
@@ -225,6 +227,38 @@ For native list rendering, include these paragraph styles in your template:
                      │   (.pages)   │
                      └──────────────┘
 ```
+
+**HTML Pipeline (macOS 26+ automatic fallback):**
+
+```
+┌─────────────┐      ┌──────────────┐      ┌─────────────────┐
+│  DOCX File  │─────▶│ Python Parser │─────▶│  JSON Blocks    │
+└─────────────┘      │ (parse_docx) │      │  (intermediate) │
+                     └──────────────┘      └────────┬────────┘
+                                                    │
+                                           ┌────────▼────────┐
+                                           │  HTML Writer    │
+                                           │ (html_writer)   │
+                                           └────────┬────────┘
+                                                    │
+                                           ┌────────▼────────┐
+                                           │  textutil       │
+                                           │ (HTML → RTF)    │
+                                           └────────┬────────┘
+                                                    │
+                                           ┌────────▼────────┐
+                                           │  Pages Opens RTF │
+                                           │ & Exports .pages │
+                                           └────────┬────────┘
+                                                    │
+                                           ┌────────▼────────┐
+                                           │  Output File    │
+                                           │    (.pages)     │
+                                           └─────────────────┘
+```
+
+Note: The RTF step is required because `pages.open()` returns null on macOS 26+,
+but RTF files opened via shell `open -a Pages` are correctly tracked in `documents`.
 
 **Key safety feature**: The template is copied at the filesystem level before any Pages automation. Pages only opens the copy, never the original template.
 
@@ -501,27 +535,31 @@ If the prompt doesn't appear:
 
 ### macOS 26+ Compatibility Issues
 
-On macOS 26.1 and later, Apple's JXA (JavaScript for Automation) APIs for Pages have known issues that affect this tool:
+On macOS 26.1 and later, Apple's JXA (JavaScript for Automation) APIs for Pages have known issues. This tool **automatically detects macOS 26+** and uses an HTML-based pipeline as a workaround.
 
-**Symptoms:**
-- "TypeError: null is not an object" during conversion
-- "Can't convert types" errors when enumerating styles
-- Conversion hangs or fails silently
+**What happens on macOS 26+:**
+- The tool uses: DOCX → JSON → HTML → Pages (open & export)
+- Semantic HTML tags (`<h1>`, `<ul>`, `<table>`) provide styled output
+- Template styles are NOT applied (Pages interprets HTML semantics instead)
+- The `--template` argument is still required but not used in HTML mode
 
-**Cause:** Apple broke several JXA APIs in macOS 26+:
-- `pages.open()` returns null instead of a document reference
-- `doc.paragraphStyles()` throws "Can't convert types"
-- `doc.bodyText.characters` throws unexpectedly
+**Output differences on macOS 26+:**
+- Headings, lists, and tables are styled semantically (not from your template)
+- Visual appearance is correct but may not match your template exactly
+- No style pollution occurs (HTML is converted fresh by Pages)
 
-**Workaround:** Use the `--force-text` flag:
+**To force plain text mode (like v1.3.0 behavior):**
 
 ```bash
 docx2pages -i doc.docx -o out.pages -t template.pages --force-text
 ```
 
-This bypasses the broken style enumeration API. The output will be plain text without styled headings or lists, but the conversion will complete successfully.
+**Root cause:** Apple broke several JXA APIs in macOS 26+:
+- `pages.open()` returns null instead of a document reference
+- `doc.paragraphStyles()` throws "Can't convert types"
+- `doc.bodyText.characters` throws unexpectedly
 
-**Note:** This is an Apple platform limitation. We monitor macOS releases and will update when these APIs are fixed.
+**Note:** This is an Apple platform limitation. We monitor macOS releases and will restore full template style support when these APIs are fixed.
 
 ### "Could not find parse_docx.py"
 
@@ -578,6 +616,8 @@ docx2pages/
 ├── scripts/
 │   ├── parse_docx.py          # DOCX parsing (Python)
 │   ├── pages_writer.js        # Pages automation (JXA)
+│   ├── html_writer.py         # JSON to HTML converter (macOS 26+ pipeline)
+│   ├── html_to_pages.js       # HTML to Pages exporter (macOS 26+ pipeline)
 │   ├── create_fixtures.py     # Test fixture generator
 │   ├── test_parser_golden.py  # Golden test runner
 │   ├── smoke_test.sh          # Integration smoke test

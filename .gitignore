@@ -39,3 +39,6 @@ venv/
 
 # Local test files
 testdata/
+
+# Claude Code
+.claude/

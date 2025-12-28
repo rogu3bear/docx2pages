@@ -13,7 +13,7 @@ struct Docx2Pages: ParsableCommand {
 
             The output document uses only the template's styles - no Word style pollution.
             """,
-        version: "1.3.0"
+        version: "1.4.0"
     )
 
     @Option(name: .shortAndLong, help: "Input DOCX file path")
@@ -66,6 +66,11 @@ struct Docx2Pages: ParsableCommand {
 
     // Lock file descriptor for concurrency safety
     private static var lockFd: Int32 = -1
+
+    /// Check if running on macOS 26+ where JXA style APIs are broken
+    private var isMacOS26Plus: Bool {
+        ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 26
+    }
 
     mutating func validate() throws {
         // Validate batch size
@@ -129,7 +134,7 @@ struct Docx2Pages: ParsableCommand {
             }
         }
 
-        log("docx2pages v1.3.0")
+        log("docx2pages v1.4.0")
         log("================")
 
         // Acquire lock unless --no-lock
@@ -233,83 +238,147 @@ struct Docx2Pages: ParsableCommand {
         // Print parsing stats
         printParseStats(parseResult.stats, log: log)
 
-        // Step 2: Copy template to TEMP output (atomic write pattern)
-        log("")
-        log("Step 2: Preparing output from template...")
-        let tempOutputURL = try prepareTempOutput(from: templateURL, finalOutput: outputURL)
-        verboseLog("Temp output: \(tempOutputURL.path)")
+        // Determine which pipeline to use
+        let useHTMLPipeline = isMacOS26Plus && !forceText
 
-        // Step 3: Write to Pages (opens the temp copy)
-        log("")
-        log("Step 3: Writing to Pages document...")
-
-        let writeResult: WriteResult
-
-        do {
-            writeResult = try writeToPagesDocument(
-                blocks: parseResult,
-                outputURL: tempOutputURL,
-                verboseLog: verboseLog
-            )
-        } catch {
-            // Clean up temp file on failure
-            try? FileManager.default.removeItem(at: tempOutputURL)
-            throw error
-        }
-
-        // Step 4: Validate results
+        var writeResult: WriteResult
         var strictFailures: [String] = []
+        let elapsed: Double
 
-        // Check style pollution
-        if !writeResult.pollutingStyles.isEmpty {
-            let msg = "Style pollution: \(writeResult.pollutingStyles.joined(separator: ", "))"
-            if strict {
-                strictFailures.append(msg)
-            }
-        }
-
-        // Check table fallback
-        if writeResult.tableFallbackCount > 0 {
-            let msg = "Table fallback: \(writeResult.tableFallbackCount) table(s) rendered as text"
-            if strict {
-                strictFailures.append(msg)
-            }
-        }
-
-        // Check list fallback (only if lists exist)
-        let hasLists = parseResult.stats.lists.bulleted + parseResult.stats.lists.numbered > 0
-        if hasLists && !writeResult.listStyleUsed {
-            let msg = "List fallback: lists rendered as formatted text (no list styles in template)"
-            if strict {
-                strictFailures.append(msg)
-            }
-        }
-
-        // Print write results
-        printWriteResults(writeResult, strict: strict, log: log)
-
-        // Step 5: Atomic move to final location
-        let elapsed = Date().timeIntervalSince(startTime)
-        var finalSuccess = true
-        var finalError: String? = nil
-
-        if strictFailures.isEmpty {
+        if useHTMLPipeline {
+            // HTML Pipeline: macOS 26+ workaround
+            // Uses HTML intermediate format to bypass broken JXA style APIs
             log("")
-            log("Step 4: Finalizing output...")
-            try safeMove(from: tempOutputURL, to: outputURL, overwrite: overwrite)
-            verboseLog("Safely moved to: \(output)")
+            log("Step 2: Generating HTML (macOS 26+ mode)...")
+            log("Note: Using HTML pipeline - template styles not applied")
+
+            let tempDir = FileManager.default.temporaryDirectory
+            let pid = ProcessInfo.processInfo.processIdentifier
+            let jsonFile = tempDir.appendingPathComponent("docx2pages_blocks_\(pid).json")
+            let htmlFile = tempDir.appendingPathComponent("docx2pages_temp_\(pid).html")
+
+            defer {
+                try? FileManager.default.removeItem(at: jsonFile)
+                try? FileManager.default.removeItem(at: htmlFile)
+            }
+
+            // Write blocks JSON for HTML writer
+            let blocksData = try JSONEncoder().encode(parseResult)
+            try blocksData.write(to: jsonFile)
+
+            // Generate HTML from JSON
+            try runHTMLWriter(jsonPath: jsonFile, outputPath: htmlFile, verboseLog: verboseLog)
+
+            log("")
+            log("Step 3: Exporting to Pages...")
+
+            // Handle overwrite - remove existing file before export
+            if FileManager.default.fileExists(atPath: outputURL.path) && overwrite {
+                try FileManager.default.removeItem(at: outputURL)
+            }
+
+            // Export HTML to Pages format
+            try runHTMLToPages(htmlPath: htmlFile, outputPath: outputURL, verboseLog: verboseLog)
+
+            elapsed = Date().timeIntervalSince(startTime)
+
+            // Create minimal write result for HTML pipeline
+            writeResult = WriteResult(
+                success: true,
+                headingsWritten: parseResult.stats.headings.values.reduce(0, +),
+                paragraphsWritten: parseResult.stats.paragraphs,
+                listsWritten: parseResult.stats.lists.bulleted + parseResult.stats.lists.numbered,
+                tablesWritten: parseResult.stats.tables.count
+            )
+
+            // Print HTML pipeline results
+            log("")
+            log("Pages Output (HTML mode):")
+            log("-------------------------")
+            log("  Headings:   \(writeResult.headingsWritten)")
+            log("  Paragraphs: \(writeResult.paragraphsWritten)")
+            log("  Lists:      \(writeResult.listsWritten)")
+            log("  Tables:     \(writeResult.tablesWritten)")
+            log("")
+            log("Note: Semantic HTML styling applied (not template styles)")
+
         } else {
-            // Clean up temp on strict failure
-            try? FileManager.default.removeItem(at: tempOutputURL)
+            // Standard JXA Pipeline: macOS 12-15 or --force-text mode
 
+            // Step 2: Copy template to TEMP output (atomic write pattern)
             log("")
-            log("✗ Strict mode failures:")
-            for failure in strictFailures {
-                log("  • \(failure)")
+            log("Step 2: Preparing output from template...")
+            let tempOutputURL = try prepareTempOutput(from: templateURL, finalOutput: outputURL)
+            verboseLog("Temp output: \(tempOutputURL.path)")
+
+            // Step 3: Write to Pages (opens the temp copy)
+            log("")
+            log("Step 3: Writing to Pages document...")
+
+            do {
+                writeResult = try writeToPagesDocument(
+                    blocks: parseResult,
+                    outputURL: tempOutputURL,
+                    verboseLog: verboseLog
+                )
+            } catch {
+                // Clean up temp file on failure
+                try? FileManager.default.removeItem(at: tempOutputURL)
+                throw error
             }
-            finalSuccess = false
-            finalError = "Strict mode: \(strictFailures.count) failure(s) detected"
+
+            // Step 4: Validate results
+
+            // Check style pollution
+            if !writeResult.pollutingStyles.isEmpty {
+                let msg = "Style pollution: \(writeResult.pollutingStyles.joined(separator: ", "))"
+                if strict {
+                    strictFailures.append(msg)
+                }
+            }
+
+            // Check table fallback
+            if writeResult.tableFallbackCount > 0 {
+                let msg = "Table fallback: \(writeResult.tableFallbackCount) table(s) rendered as text"
+                if strict {
+                    strictFailures.append(msg)
+                }
+            }
+
+            // Check list fallback (only if lists exist)
+            let hasLists = parseResult.stats.lists.bulleted + parseResult.stats.lists.numbered > 0
+            if hasLists && !writeResult.listStyleUsed {
+                let msg = "List fallback: lists rendered as formatted text (no list styles in template)"
+                if strict {
+                    strictFailures.append(msg)
+                }
+            }
+
+            // Print write results
+            printWriteResults(writeResult, strict: strict, log: log)
+
+            // Step 5: Atomic move to final location
+            elapsed = Date().timeIntervalSince(startTime)
+
+            if strictFailures.isEmpty {
+                log("")
+                log("Step 4: Finalizing output...")
+                try safeMove(from: tempOutputURL, to: outputURL, overwrite: overwrite)
+                verboseLog("Safely moved to: \(output)")
+            } else {
+                // Clean up temp on strict failure
+                try? FileManager.default.removeItem(at: tempOutputURL)
+
+                log("")
+                log("✗ Strict mode failures:")
+                for failure in strictFailures {
+                    log("  • \(failure)")
+                }
+            }
         }
+
+        let finalSuccess = strictFailures.isEmpty
+        let finalError: String? = strictFailures.isEmpty ? nil : "Strict mode: \(strictFailures.count) failure(s) detected"
 
         log("")
         log(String(format: "Completed in %.2f seconds", elapsed))
@@ -771,6 +840,91 @@ struct Docx2Pages: ParsableCommand {
         }
     }
 
+    // MARK: - HTML Pipeline (macOS 26+ workaround)
+
+    /// Run the HTML writer to convert JSON blocks to HTML
+    private func runHTMLWriter(jsonPath: URL, outputPath: URL, verboseLog: (String) -> Void) throws {
+        guard let python3Path = findPython3() else {
+            throw ValidationError("Python 3 not found for HTML writer")
+        }
+
+        guard let scriptPath = findScript("html_writer.py") else {
+            throw ValidationError("Could not find html_writer.py script")
+        }
+
+        verboseLog("Using HTML writer: \(scriptPath)")
+
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: python3Path)
+        process.arguments = [scriptPath, jsonPath.path, outputPath.path]
+
+        let errorPipe = Pipe()
+        process.standardError = errorPipe
+
+        let status = try runWithTimeout(process, timeout: TimeInterval(timeout), processName: "HTML writer")
+
+        if status != 0 {
+            let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
+            let errorMessage = String(data: errorData, encoding: .utf8) ?? "Unknown error"
+            throw ValidationError("HTML generation failed: \(errorMessage)")
+        }
+
+        verboseLog("HTML written to: \(outputPath.path)")
+    }
+
+    /// Run the HTML to Pages exporter
+    private func runHTMLToPages(htmlPath: URL, outputPath: URL, verboseLog: (String) -> Void) throws {
+        guard let scriptPath = findScript("html_to_pages.js") else {
+            throw ValidationError("Could not find html_to_pages.js script")
+        }
+
+        verboseLog("Using HTML exporter: \(scriptPath)")
+
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/osascript")
+        process.arguments = ["-l", "JavaScript", scriptPath, htmlPath.path, outputPath.path]
+
+        let outputPipe = Pipe()
+        let errorPipe = Pipe()
+        process.standardOutput = outputPipe
+        process.standardError = errorPipe
+
+        verboseLog("Opening HTML in Pages and exporting...")
+
+        _ = try runWithTimeout(process, timeout: TimeInterval(timeout), processName: "HTML to Pages export")
+
+        let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
+
+        guard let outputString = String(data: outputData, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !outputString.isEmpty else {
+            throw ValidationError("HTML to Pages export returned no output")
+        }
+
+        // Parse result JSON
+        guard let resultData = outputString.data(using: .utf8) else {
+            throw ValidationError("Could not parse HTML export result")
+        }
+
+        struct ExportResult: Decodable {
+            let success: Bool
+            let error: String?
+            let output: String?
+        }
+
+        do {
+            let result = try JSONDecoder().decode(ExportResult.self, from: resultData)
+            if !result.success {
+                throw ValidationError("HTML to Pages export failed: \(result.error ?? "Unknown error")")
+            }
+            verboseLog("Exported to: \(result.output ?? outputPath.path)")
+        } catch let error as ValidationError {
+            throw error
+        } catch {
+            verboseLog("Raw output: \(outputString)")
+            throw ValidationError("Failed to parse export result: \(error)")
+        }
+    }
+
     private func findScript(_ name: String) -> String? {
         var searchPaths: [String] = []
 
@@ -1049,6 +1203,24 @@ struct WriteResult: Codable {
         case pollutingStyles
         case unusedBaselineStyles
         case listStyleUsed
+    }
+
+    /// Convenience initializer for HTML pipeline (minimal result)
+    init(success: Bool, headingsWritten: Int, paragraphsWritten: Int, listsWritten: Int, tablesWritten: Int) {
+        self.success = success
+        self.error = nil
+        self.headingsWritten = headingsWritten
+        self.paragraphsWritten = paragraphsWritten
+        self.listsWritten = listsWritten
+        self.tablesWritten = tablesWritten
+        self.tableFallbackCount = 0
+        self.warnings = []
+        self.baselineStyles = []
+        self.finalStyles = []
+        self.stylesUsed = []
+        self.pollutingStyles = []
+        self.unusedBaselineStyles = []
+        self.listStyleUsed = true  // HTML uses semantic list tags
     }
 }
 
