@@ -6,6 +6,8 @@ A macOS command-line tool that converts Word documents (.docx) to Pages document
 
 ## Overview
 
+> **⚠️ macOS 26+ Users:** Apple's JXA APIs are currently broken on macOS 26.1+. Use `--force-text` flag as a workaround (outputs plain text without styling). We're designing a proper fix—see [Troubleshooting](#macos-26-compatibility-issues).
+
 When you open a .docx file directly in Pages, it imports the Word styles, creating duplicates and "imported" variants that pollute your style list. This tool avoids that by:
 
 1. **Parsing** the DOCX file to extract pure structure (headings, paragraphs, lists, tables)
