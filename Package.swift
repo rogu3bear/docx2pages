@@ -19,6 +19,11 @@ let package = Package(
             resources: [
                 .copy("../../scripts")
             ]
+        ),
+        .testTarget(
+            name: "docx2pagesTests",
+            dependencies: [],
+            path: "Tests/docx2pagesTests"
         )
     ]
 )

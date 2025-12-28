@@ -47,6 +47,19 @@ jobs:
         run: |
           python3 scripts/test_edge_cases.py
 
+      - name: Run Python unit tests
+        run: |
+          python3 scripts/test_parse_docx_unit.py
+
+  js-unit-tests:
+    name: JavaScript Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run JS unit tests
+        run: node scripts/test_pages_writer_unit.js
+
   build-macos:
     name: Build (macOS ${{ matrix.macos }})
     strategy:
@@ -79,7 +92,12 @@ jobs:
           echo "$HELP" | grep -q -- "--no-wait" || (echo "Missing --no-wait"; exit 1)
           echo "$HELP" | grep -q -- "--no-lock" || (echo "Missing --no-lock"; exit 1)
           echo "$HELP" | grep -q -- "--verbose" || (echo "Missing --verbose"; exit 1)
+          echo "$HELP" | grep -q -- "--force-text" || (echo "Missing --force-text"; exit 1)
+          echo "$HELP" | grep -q -- "--timeout" || (echo "Missing --timeout"; exit 1)
           echo "CLI surface contract verified."
+
+      - name: Run Swift unit tests
+        run: swift test
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4

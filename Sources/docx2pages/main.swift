@@ -13,7 +13,7 @@ struct Docx2Pages: ParsableCommand {
 
             The output document uses only the template's styles - no Word style pollution.
             """,
-        version: "1.2.0"
+        version: "1.3.0"
     )
 
     @Option(name: .shortAndLong, help: "Input DOCX file path")
@@ -77,6 +77,11 @@ struct Docx2Pages: ParsableCommand {
         if timeout < 1 || timeout > 3600 {
             throw ValidationError("--timeout must be between 1 and 3600 seconds (got \(timeout))")
         }
+
+        // Early Python validation - fail fast if Python 3 is not available
+        guard findPython3() != nil else {
+            throw ValidationError("Python 3 not found. Install Python 3 or set PYTHON3 environment variable.")
+        }
     }
 
     // Lock info for stale detection
@@ -124,7 +129,7 @@ struct Docx2Pages: ParsableCommand {
             }
         }
 
-        log("docx2pages v1.2.0")
+        log("docx2pages v1.3.0")
         log("================")
 
         // Acquire lock unless --no-lock

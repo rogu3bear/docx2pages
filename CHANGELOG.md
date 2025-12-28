@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-12-27
+
+### Added
+- **macOS 26+ compatibility**: Added `--force-text` flag to work around broken JXA APIs in macOS 26.1+.
+- **`--timeout` flag**: Configure process timeout (1-3600 seconds, default: 120).
+- **Lossless JSON format**: Parser now outputs structured metadata for hyperlinks and merged cells.
+  - Links include `text`, `url`, `start`, `end` positions.
+  - Merged cells include `row`, `col`, `rowspan`, `colspan`.
+- **Early Python validation**: CLI now validates Python 3 availability at startup for faster error feedback.
+- **Unit test suites**: Added Python, Swift, and JavaScript unit tests for core functions.
+
+### Changed
+- Release builds now use macOS 13 for broader compatibility.
+- CI now includes Python unit tests, JS unit tests, and Swift CLI tests.
+- CLI surface contract checks now verify `--force-text` and `--timeout` flags.
+- Pinned `defusedxml==0.7.1` for reproducible builds.
+
+### Fixed
+- **defusedxml import error**: Now shows helpful installation instructions if missing.
+- **Pages save error handling**: Save failures are now caught and reported properly.
+- **Style enumeration logging**: Explicit "DEGRADING TO PLAIN TEXT MODE" message when styles unavailable.
+- **Recursion depth protection**: Parser now limits XML traversal to prevent stack overflow on deeply nested documents.
+
+### Documentation
+- README now documents `--force-text` and `--timeout` flags.
+- Added "macOS 26+ Compatibility Issues" troubleshooting section.
+- Requirements section notes macOS 26+ has known JXA issues.
+
 ## [1.2.0] - 2025-12-24
 
 ### Added

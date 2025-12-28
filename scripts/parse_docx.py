@@ -13,7 +13,18 @@ import re
 from pathlib import Path
 
 # Use defusedxml for XXE protection (REQUIRED)
-import defusedxml.ElementTree as ET
+try:
+    import defusedxml.ElementTree as ET
+except ImportError:
+    print("Error: defusedxml not installed.", file=sys.stderr)
+    print("Install with: pip3 install defusedxml", file=sys.stderr)
+    print("Or: pip3 install -r requirements.txt", file=sys.stderr)
+    sys.exit(1)
+
+# Recursion limit for deeply nested XML (default Python is ~1000)
+# DOCX files can have deeply nested runs inside tables inside cells
+MAX_RECURSION_DEPTH = 1000
+sys.setrecursionlimit(max(sys.getrecursionlimit(), MAX_RECURSION_DEPTH + 100))
 
 # Control characters that are invalid in JSON (except tab, newline, carriage return)
 # JSON allows: \t (0x09), \n (0x0A), \r (0x0D) but requires escaping
@@ -98,8 +109,11 @@ def get_text(elem, relationships=None, extract_links=False):
     texts = []
     links = []  # Collect structured link metadata
 
-    def process_element(el):
+    def process_element(el, depth=0):
         """Recursively process element and its children."""
+        if depth > MAX_RECURSION_DEPTH:
+            # Bail out on excessively deep XML to prevent stack overflow
+            return
         tag = el.tag.replace('{%s}' % NAMESPACES['w'], '')
 
         if tag == 'hyperlink':
@@ -111,7 +125,7 @@ def get_text(elem, relationships=None, extract_links=False):
 
             # Process children (the text content of the link)
             for child in el:
-                process_element(child)
+                process_element(child, depth + 1)
 
             # Record position after link text
             link_text_end = len(''.join(texts))
@@ -153,7 +167,7 @@ def get_text(elem, relationships=None, extract_links=False):
 
         # Process children for non-hyperlink elements
         for child in el:
-            process_element(child)
+            process_element(child, depth + 1)
 
     # Start recursive processing
     process_element(elem)

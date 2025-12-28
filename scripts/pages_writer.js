@@ -120,12 +120,17 @@ function run(argv) {
                     baselineStyleNames.push(styleName);
                 }
             } catch (e) {
-                log(`Warning: Could not enumerate styles: ${e}`);
+                log(`Warning: Style enumeration failed: ${e}`);
+                log(`DEGRADING TO PLAIN TEXT MODE - headings and lists will not be styled`);
                 styleEnumerationFailed = true;
             }
         }
 
-        log(`Baseline styles: ${baselineStyleNames.join(', ')}`);
+        if (styleEnumerationFailed) {
+            log(`Baseline styles: (unavailable - plain text mode)`);
+        } else {
+            log(`Baseline styles: ${baselineStyleNames.join(', ')}`);
+        }
 
         // Build style mapping from baseline styles
         const styleMap = buildStyleMap(baselineStyles, options);
@@ -303,7 +308,13 @@ function run(argv) {
 
         // Save document explicitly
         log("Saving document...");
-        doc.save();
+        try {
+            doc.save();
+        } catch (saveErr) {
+            const msg = `Failed to save document: ${saveErr}`;
+            log(msg);
+            throw new Error(msg);
+        }
         delay(0.5);
 
         // Collect final style names to check for pollution

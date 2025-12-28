@@ -41,7 +41,7 @@ The result: a clean Pages document that looks like it was created natively in Pa
 
 ## Requirements
 
-- macOS 12.0 or later
+- macOS 12.0 or later (macOS 26+ has [known JXA issues](#macos-26-compatibility-issues))
 - Pages.app installed
 - Python 3.x with `defusedxml` package (for secure DOCX parsing)
 - Swift 5.9+ toolchain (for building from source only)
@@ -129,6 +129,8 @@ docx2pages --input <file.docx> --output <file.pages> --template <template.pages>
 | `--batch-size` | | Paragraph batch size for Pages writer (default: 50) |
 | `--json-summary` | | Write JSON summary to file (use `-` for stdout) |
 | `--scripts-dir` | | Directory containing scripts (for dist package) |
+| `--force-text` | | Skip style API (macOS 26+ compatibility, plain text output) |
+| `--timeout` | | Process timeout in seconds (default: 120, range: 1-3600) |
 | `--verbose` | `-v` | Enable verbose logging |
 | `--help` | `-h` | Show help |
 | `--version` | | Show version |
@@ -494,6 +496,30 @@ If the prompt doesn't appear:
 2. Click the + button
 3. Navigate to your terminal app
 4. Check "Pages" in the list
+
+### macOS 26+ Compatibility Issues
+
+On macOS 26.1 and later, Apple's JXA (JavaScript for Automation) APIs for Pages have known issues that affect this tool:
+
+**Symptoms:**
+- "TypeError: null is not an object" during conversion
+- "Can't convert types" errors when enumerating styles
+- Conversion hangs or fails silently
+
+**Cause:** Apple broke several JXA APIs in macOS 26+:
+- `pages.open()` returns null instead of a document reference
+- `doc.paragraphStyles()` throws "Can't convert types"
+- `doc.bodyText.characters` throws unexpectedly
+
+**Workaround:** Use the `--force-text` flag:
+
+```bash
+docx2pages -i doc.docx -o out.pages -t template.pages --force-text
+```
+
+This bypasses the broken style enumeration API. The output will be plain text without styled headings or lists, but the conversion will complete successfully.
+
+**Note:** This is an Apple platform limitation. We monitor macOS releases and will update when these APIs are fixed.
 
 ### "Could not find parse_docx.py"
 
