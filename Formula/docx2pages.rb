@@ -9,8 +9,10 @@
 class Docx2pages < Formula
   desc "Convert Microsoft Word documents to Apple Pages format"
   homepage "https://github.com/rogu3bear/docx2pages"
-  url "https://github.com/rogu3bear/docx2pages/archive/refs/tags/v1.2.0.tar.gz"
-  sha256 "PLACEHOLDER_SHA256"
+  url "https://github.com/rogu3bear/docx2pages/archive/refs/tags/v1.4.0.tar.gz"
+  # TODO: Update SHA256 after pushing v1.4.0 tag and creating release
+  # Compute with: curl -sL https://github.com/rogu3bear/docx2pages/archive/refs/tags/v1.4.0.tar.gz | shasum -a 256
+  sha256 "PLACEHOLDER_SHA256_NEEDS_UPDATE"
   license "MIT"
   head "https://github.com/rogu3bear/docx2pages.git", branch: "main"
 

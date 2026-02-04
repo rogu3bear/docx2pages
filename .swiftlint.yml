@@ -1,0 +1,34 @@
+# SwiftLint configuration
+# https://github.com/realm/SwiftLint
+
+# Only lint our source files
+included:
+  - Sources
+
+excluded:
+  - .build
+  - Package.swift
+
+# Disable rules that are too strict for now
+disabled_rules:
+  - trailing_whitespace
+  - line_length
+  - force_cast
+  - force_try
+  - force_unwrapping
+
+# Opt-in rules (additional checks)
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - closure_spacing
+
+# Configure specific rules
+line_length:
+  warning: 150
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+# Report as warnings, not errors (don't block builds)
+reporter: "xcode"

@@ -1,0 +1,47 @@
+# Ruff configuration for Python linting
+# https://docs.astral.sh/ruff/
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+
+# Lint all Python files in scripts/
+include = ["scripts/*.py"]
+
+[tool.ruff.lint]
+# Enable common rule sets (not too strict for now)
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+
+# Ignore some rules that are too strict initially
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # function call in default argument
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["scripts"]
+
+[tool.pytest.ini_options]
+testpaths = ["scripts"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v"
+
+[tool.coverage.run]
+source = ["scripts"]
+omit = ["scripts/test_*.py", "scripts/create_fixtures.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]

@@ -3,6 +3,8 @@ import ArgumentParser
 
 @main
 struct Docx2Pages: ParsableCommand {
+    static let version = "1.4.0"
+
     static let configuration = CommandConfiguration(
         commandName: "docx2pages",
         abstract: "Convert DOCX files to Pages documents using a template's native styles.",
@@ -13,7 +15,7 @@ struct Docx2Pages: ParsableCommand {
 
             The output document uses only the template's styles - no Word style pollution.
             """,
-        version: "1.4.0"
+        version: version
     )
 
     @Option(name: .shortAndLong, help: "Input DOCX file path")
@@ -134,7 +136,7 @@ struct Docx2Pages: ParsableCommand {
             }
         }
 
-        log("docx2pages v1.4.0")
+        log("docx2pages v\(Self.version)")
         log("================")
 
         // Acquire lock unless --no-lock
@@ -389,7 +391,7 @@ struct Docx2Pages: ParsableCommand {
         // Write JSON summary if requested
         if let summaryPath = jsonSummary {
             let summary = JSONSummary(
-                toolVersion: "1.2.0",
+                toolVersion: Self.version,
                 input: input,
                 output: output,
                 template: template,

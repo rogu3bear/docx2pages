@@ -7,6 +7,51 @@ on:
     branches: [main]
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Python linting with Ruff
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Lint Python (ruff)
+        run: ruff check scripts/ --output-format=github
+        continue-on-error: true  # Don't block build initially
+
+      # JavaScript linting with ESLint
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ESLint
+        run: npm install eslint@8
+
+      - name: Lint JavaScript (eslint)
+        run: npx eslint scripts/*.js --format stylish
+        continue-on-error: true  # Don't block build initially
+
+  lint-swift:
+    name: Lint Swift
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Lint Swift (swiftlint)
+        run: swiftlint lint --reporter github-actions-logging
+        continue-on-error: true  # Don't block build initially
+
   parser-tests:
     name: Parser Tests
     strategy:
@@ -24,6 +69,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip3 install -r requirements.txt
+          pip3 install pytest pytest-cov
 
       - name: Test parser on all fixtures
         run: |
@@ -39,17 +85,24 @@ jobs:
           done
           echo "All fixtures parsed successfully."
 
-      - name: Run golden tests
+      - name: Run Python tests with coverage
         run: |
-          python3 scripts/test_parser_golden.py
+          pytest scripts/test_parse_docx_unit.py scripts/test_parser_golden.py scripts/test_edge_cases.py \
+            --cov=scripts \
+            --cov-report=term-missing \
+            --cov-report=xml \
+            -v
 
-      - name: Run edge case tests
-        run: |
-          python3 scripts/test_edge_cases.py
-
-      - name: Run Python unit tests
-        run: |
-          python3 scripts/test_parse_docx_unit.py
+      - name: Upload Python coverage to Codecov
+        if: matrix.os == 'ubuntu-latest'
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          flags: python
+          name: python-coverage
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   js-unit-tests:
     name: JavaScript Unit Tests
@@ -96,8 +149,26 @@ jobs:
           echo "$HELP" | grep -q -- "--timeout" || (echo "Missing --timeout"; exit 1)
           echo "CLI surface contract verified."
 
-      - name: Run Swift unit tests
-        run: swift test
+      - name: Run Swift unit tests with coverage
+        run: swift test --enable-code-coverage
+
+      - name: Generate Swift coverage report
+        run: |
+          BIN_PATH=$(swift build --show-bin-path)
+          XCTEST_PATH=$(find $BIN_PATH -name '*.xctest' -type d | head -1)
+          if [ -n "$XCTEST_PATH" ]; then
+            COV_DATA=$(find .build -name 'default.profdata' -type f | head -1)
+            if [ -n "$COV_DATA" ]; then
+              echo "=== Swift Code Coverage Summary ==="
+              xcrun llvm-cov report "$XCTEST_PATH/Contents/MacOS/docx2pagesPackageTests" \
+                -instr-profile="$COV_DATA" \
+                -ignore-filename-regex='.build|Tests' 2>/dev/null || \
+              xcrun llvm-cov report "$BIN_PATH/docx2pagesPackageTests.xctest/Contents/MacOS/docx2pagesPackageTests" \
+                -instr-profile="$COV_DATA" \
+                -ignore-filename-regex='.build|Tests' 2>/dev/null || \
+              echo "Could not generate coverage report (binary structure may differ)"
+            fi
+          fi
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4
