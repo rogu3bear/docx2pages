@@ -15,7 +15,7 @@ jobs:
     env:
       TEMPLATE: ${{ github.event.inputs.template_path }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check for Pages.app
         id: check-pages

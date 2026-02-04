@@ -11,7 +11,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # Python linting with Ruff
       - name: Set up Python
@@ -43,7 +43,7 @@ jobs:
     name: Lint Swift
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install SwiftLint
         run: brew install swiftlint
@@ -59,7 +59,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -108,7 +108,7 @@ jobs:
     name: JavaScript Unit Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Run JS unit tests
         run: node scripts/test_pages_writer_unit.js
@@ -120,7 +120,7 @@ jobs:
         macos: [macos-13, macos-14]
     runs-on: ${{ matrix.macos }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build release
         run: swift build -c release
