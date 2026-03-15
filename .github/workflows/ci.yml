@@ -27,16 +27,14 @@ jobs:
         continue-on-error: true  # Don't block build initially
 
       # JavaScript linting with ESLint
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Install ESLint
-        run: npm install eslint@8
+        run: bun install eslint@8
 
       - name: Lint JavaScript (eslint)
-        run: npx eslint scripts/*.js --format stylish
+        run: bunx eslint scripts/*.js --format stylish
         continue-on-error: true  # Don't block build initially
 
   lint-swift:
